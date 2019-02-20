@@ -1,0 +1,42 @@
+.resalta {
+    font-weight: bold;
+}
+
+.FooterProveedor {
+    position: fixed;
+    bottom: 3px;
+    z-index: 997;
+    background: #d6d3d1;
+    margin-left: .5%;
+}
+
+.mensaje{
+   height: 46px;
+   font-size: 17px;
+}
+.mensaje :hover{
+    background: #ff802d;
+}
+
+.x-navigation.x-navigation-horizontal > li > a.crece{
+    font-size: 22px;
+}
+.naranja{
+    color:#FF802D;
+}
+/*li.menu-desplegable{
+    background-color: #F74902;
+}
+li.menu-desplegable:hover{
+    background-color: #5bbf21;
+}
+
+
+Viejos
+    naranja: #f98f4efc
+    verde: #95b75d
+Nuevos
+
+Naranja #F74902
+Verde #5bbf21
+    */
