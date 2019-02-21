@@ -35,9 +35,7 @@ class directoriocontroller extends Controller
         $nosuc = DB::table('Sucursal')->where('Sucursal','like','%'.$urlinputx.'%');
 
         $direccion = DB::table('Sucursal')->where('Direccion','like','%'.$urlinputx.'%');
-        
-        $ciudad = DB::table('Sucursal')->where('Ciudad','like','%'.$urlinputx.'%');
-        
+                       
         $estado = DB::table('Sucursal')->where('Estado','like','%'.$urlinputx.'%');
 
         $latitud = DB::table('Sucursal')->where('Latitud','like','%'.$urlinputx.'%');
@@ -48,8 +46,7 @@ class directoriocontroller extends Controller
             ->where('sucursal', 'LIKE', '%'.$urlinputx.'%')
             ->union($nombresuc)
             ->union($nosuc)
-            ->union($direccion)
-            ->union($ciudad)
+            ->union($direccion)         
             ->union($estado)
             ->union($latitud)
             ->union($longitud)
