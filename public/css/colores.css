@@ -24,6 +24,12 @@
 .naranja{
     color:#FF802D;
 }
+.alineado{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);}
 /*li.menu-desplegable{
     background-color: #F74902;
 }

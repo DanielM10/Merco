@@ -13,6 +13,8 @@
 //------------------------------RUTAS DE DETALLE-----------------------------------//
 Route::get('/detalleordenes', 'detallesController@detalleordenes')->name('detalleordenes');
 Route::get('/detalleentregas', 'detallesController@detalleentregas')->name('detalleentregas');
+
+
 //---------------------------------------------------------------------------------//
 //---------------------------CONTROLADOR EXCEL Y PDF-------------------------------//
 Route::get('/export_proveedores', 'ExcelController@export_proveedores')->name('exportproveedores');
@@ -45,74 +47,75 @@ Route::post('configuracionupdate','configuracioncontroller@update')->name('confi
 //---------------------------RUTAS PARA ACCIONES DE USUARIOS----------------------------------------//
 Route::delete('usuarioborrar','usuarioController@destroy')->name('usuarioborrar');
 Route::get('usuario/get/{id}', 'usuarioController@getcombos');
-Route::resource('usuario','usuariocontroller');
+Route::get('usuario','usuariocontroller@index');
 Route::post('usuarioadd','usuarioController@store')->name('usuarioadd');
 Route::post('usuarioedit','usuarioController@update')->name('usuarioedit');
 Route::post('passupdate','usuarioController@passupdate')->name('passupdate');
 //---------------------------------------------------------------------------------//
 //---------------------------RUTAS PARA ACCIONES DE HOME----------------------------------------//
 Route::delete('homeborrar','homeController@destroy')->name('homeborrar');
-Route::resource('home','homecontroller');
+Route::get('home','homecontroller@index');
+Route::get('home/','homecontroller@index');
 Route::post('homeadd','homeController@store')->name('homeadd');
 Route::post('homeedit','homeController@update')->name('homeedit');
 //---------------------------------------------------------------------------------//
 //---------------------------RUTAS PARA ACCIONES DE ROLES----------------------------------------//
 Route::delete('rolborrar','rolesController@destroy')->name('rolborrar');
-Route::resource('roles','rolescontroller');
+Route::get('roles','rolescontroller@index');
 Route::post('rolesadd','rolesController@store')->name('rolesadd');
 Route::post('rolesedit','rolesController@update')->name('rolesedit');
 //---------------------------------------------------------------------------------//
 //-------------------------RUTAS PARA ACCIONES DE DEPARTAMENTO--------------------------------
 Route::delete('departamentoborrar','departamentoController@destroy')->name('departamentoborrar');
-Route::resource('departamento','departamentoController');
+Route::get('departamento','departamentoController@index');
 Route::post('departamentoadd','departamentoController@store')->name('departamentoadd');
 Route::post('departamentoedit','departamentoController@update')->name('departamentoedit');
 //---------------------------------------------------------
 //--------------------------RUTAS DE ACCIONES PARA PROFESION--------------------------
 Route::delete('profesionborrar','profesioncontroller@destroy')->name('profesionborrar');
-Route::resource('profesion','profesioncontroller');
+Route::get('profesion','profesioncontroller@index');
 Route::post('profesionadd','profesioncontroller@store')->name('profesionadd');
 Route::post('profesionedit','profesioncontroller@update')->name('profesionedit');
 //-----------------------------------------------------
 //--------------------------RUTAS DE ACCIONES PARA PROVEEDORES--------------------------
 Route::delete('proveedoresborrar','proveedorescontroller@destroy')->name('proveedorborrar');
-Route::resource('proveedores','proveedorescontroller');
+Route::get('proveedores','proveedorescontroller@index');
 Route::post('proveedoresadd','proveedorescontroller@store')->name('proveedoradd');
 Route::post('proveedoresedit','proveedorescontroller@update')->name('proveedoredit');
 //-----------------------------------------------------
 //--------------------------RUTAS DE ACCIONES PARA DIRECTORIO--------------------------
 Route::delete('directorioborrar','directoriocontroller@destroy')->name('directorioborrar');
-Route::resource('directorio','directoriocontroller');
+Route::get('directorio','directoriocontroller@index');
 Route::post('directorioadd','directoriocontroller@store')->name('directorioadd');
 Route::post('directorioedit','directoriocontroller@update')->name('directorioedit');
 //-----------------------------------------------------
 //--------------------------RUTAS DE ACCIONES PARA SERVICIOS PRODUCTOS--------------------------
 Route::delete('serviciosproductosborrar','serviciosproductoscontroller@destroy')->name('serviciosproductosborrar');
-Route::resource('serviciosproductos','serviciosproductoscontroller');
+Route::get('serviciosproductos','serviciosproductoscontroller@index');
 Route::post('serviciosproductosadd','serviciosproductoscontroller@store')->name('serviciosproductosadd');
 Route::post('serviciosproductosedit','serviciosproductoscontroller@update')->name('serviciosproductosedit');
 //-----------------------------------------------------
 //--------------------------RUTAS DE ACCIONES PARA ORDENES COMPRA--------------------------
 Route::delete('ordenescompraborrar','ordenescompracontroller@destroy')->name('ordenescompraborrar');
-Route::resource('ordenescompra','ordenescompracontroller');
+Route::get('ordenescompra','ordenescompracontroller@index');
 Route::post('ordenescompraadd','ordenescompracontroller@store')->name('ordenescompraadd');
 Route::post('ordenescompraedit','ordenescompracontroller@update')->name('ordenescompraedit');
 //-----------------------------------------------------
 //--------------------------RUTAS DE ACCIONES PARA ENTREGAS--------------------------
 Route::delete('entregasborrar','entregasontroller@destroy')->name('entregasborrar');
-Route::resource('entregas','entregascontroller');
+Route::get('entregas','entregascontroller@index');
 Route::post('entregasadd','entregascontroller@store')->name('entregasadd');
 Route::post('entregasedit','entregascontroller@update')->name('entregasedit');
 //-----------------------------------------------------
 //--------------------------RUTAS DE ACCIONES PARA PAGOS--------------------------
 Route::delete('pagosborrar','pagoscontroller@destroy')->name('pagosborrar');
-Route::resource('pagos','pagoscontroller');
+Route::get('pagos','pagoscontroller@index');
 Route::post('pagosadd','pagoscontroller@store')->name('pagosadd');
 Route::post('pagosedit','pagoscontroller@update')->name('pagosedit');
 //-----------------------------------------------------
 //--------------------------RUTAS DE ACCIONES PARA ACLARACIONES--------------------------
 Route::delete('aclaracionesborrar','aclaracionescontroller@destroy')->name('aclaracionesborrar');
-Route::resource('aclaraciones', 'aclaracionescontroller', ['except' => ['show']]);
+Route::get('aclaraciones', 'aclaracionescontroller@index');
 Route::post('aclaracionesadd','aclaracionescontroller@store')->name('aclaracionesadd');
 Route::post('aclaracionesedit','aclaracionescontroller@update')->name('aclaracionesedit');
 //-----------------------------------------------------
