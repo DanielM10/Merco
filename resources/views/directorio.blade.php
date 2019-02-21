@@ -68,8 +68,7 @@
                                 <div class="panel-body">
                                 <div class="contact-info">                                                               
                                     <p><small>Num. de Sucursal</small><br />{{$sucursal->Sucursal}}</p>
-                                    <p><small>Estado</small><br />{{$sucursal->Estado}}</p>
-                                    <p><small>Ciudad</small><br />{{$sucursal->Ciudad}}</p>
+                                    <p><small>Estado</small><br />{{$sucursal->Estado}}</p>                                   
                                     <p><small>Dirección</small><br />{{$sucursal->Direccion}}</p>  
                                     <p><small>Mapa</small><br /></p>  
                                     <div align="center">
