@@ -30,9 +30,9 @@ class directoriocontroller extends Controller
         $urlinputx = $request->input('busqsucursal');
         if($urlinputx!=null){
       
-        $nombresuc = DB::table('Sucursal')->where('NombreSuc','like','%'.$urlinputx.'%');
+        $nombresuc = DB::table('Sucursal')->where('Nombre','like','%'.$urlinputx.'%');
         
-        $nosuc = DB::table('Sucursal')->where('NoSucursal','like','%'.$urlinputx.'%');
+        $nosuc = DB::table('Sucursal')->where('Sucursal','like','%'.$urlinputx.'%');
 
         $direccion = DB::table('Sucursal')->where('Direccion','like','%'.$urlinputx.'%');
         
@@ -45,7 +45,7 @@ class directoriocontroller extends Controller
         $longitud = DB::table('Sucursal')->where('Longitud','like','%'.$urlinputx.'%');
         
         $sucursales = DB::table('Sucursal')
-            ->where('idsucursal', 'LIKE', '%'.$urlinputx.'%')
+            ->where('sucursal', 'LIKE', '%'.$urlinputx.'%')
             ->union($nombresuc)
             ->union($nosuc)
             ->union($direccion)

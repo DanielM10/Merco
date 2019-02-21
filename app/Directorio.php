@@ -10,6 +10,6 @@ class Directorio extends Model
     protected $table = 'Sucursal';
     
     protected $fillable = [
-        'idsucursal', 'NombreSuc','NoSucursal','Direccion','Ciudad','Estado','Latitud','Longitud'
+        'idsucursal', 'Sucursal','Nombre','Direccion','Ciudad','Estado','Latitud','Longitud'
   ];
 }

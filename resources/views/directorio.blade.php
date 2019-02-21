@@ -62,12 +62,12 @@
                            <div class="panel-body profile">
 
                                <div class="profile-data">
-                               <div class="profile-data-name">{{$sucursal->NombreSuc}}</div>
+                               <div class="profile-data-name">{{$sucursal->Nombre}}</div>
                                </div>
                                 </div>
                                 <div class="panel-body">
                                 <div class="contact-info">                                                               
-                                    <p><small>Num. de Sucursal</small><br />{{$sucursal->NoSucursal}}</p>
+                                    <p><small>Num. de Sucursal</small><br />{{$sucursal->Sucursal}}</p>
                                     <p><small>Estado</small><br />{{$sucursal->Estado}}</p>
                                     <p><small>Ciudad</small><br />{{$sucursal->Ciudad}}</p>
                                     <p><small>Dirección</small><br />{{$sucursal->Direccion}}</p>  
