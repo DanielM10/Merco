@@ -138,11 +138,9 @@ $user=$request->all();
                 );
              $pass->update(
                 [                
-                'password'=>  bcrypt($request->pass),                              
-                ],
-                [                
-                    'FechaContraseña'=>  $request->contraupdate,                              
-                    ]
+                'password'=>  bcrypt($request->pass),     
+                'FechaContraseña'=>  $request->contraupdate                         
+                ]               
             );   
             Session::flash('passupdate', 'Contraseña modificada correctamente.' );
             return redirect('usuario');
