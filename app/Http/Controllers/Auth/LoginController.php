@@ -35,14 +35,19 @@ public function postLogin()
         return Redirect('login')->withErrors('El usuario no existe.');
     }
     // Obtenemos los datos del formulario
-           
+    //TRAEMOS LA DIFERENCIA DE DIAS ENTRE LA FECHACONTRA Y LA FECHA ACTUAL
+    $DIFF=DB::table('users')->select(DB::raw('DATEDIFF(DAY,Fechacontraseña, convert(date,getdate())) as DIFERENCIA'))->where('email','=',$correo)->first()->DIFERENCIA;
+    $DIFFORI=DB::table('Configuracion')->select('Valor')->where('Descripcion','=','Vigencia')->first()->Valor;          
     //traemos los intentos de bloqueo   
     $intentos = DB::table('users')->select('Intentos_Bloqueo')->where('email','=',$correo)->first()->Intentos_Bloqueo;
     $bloque= DB::table('Configuracion')->select('Valor')->where('Descripcion','=','Intentos Bloqueo')->first()->Valor;    
     $restante=$bloque-$intentos;
     // Verificamos los datos
     //SOLO FALTA VER COMO DIABLOS LOGUEAR A ESTE MEN SIN PASARSE POR ALTO EL INTENTO DE BLOQUEOS
-    if($intentos>=$bloque){
+    if($DIFF>=$DIFFORI){
+        return Redirect('login')->withErrors('Tu contraseña expiro,contacte al administrador.');
+    }
+   else if($intentos>=$bloque){
          User::where('email','=',$correo)->increment('Intentos_Bloqueo');
         return Redirect('login')->withErrors('Usuario bloqueado,contacte al administrador.');    
     }
