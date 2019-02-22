@@ -104,7 +104,7 @@ trait ResetsPasswords
     {
         $user->password = Hash::make($password);
 
-        $user->FechaContraseña = $ldate = date('d-m-Y');
+        $user->FechaContraseña = $ldate = date('Y-m-d');
 
         $user->setRememberToken(Str::random(60));
 
