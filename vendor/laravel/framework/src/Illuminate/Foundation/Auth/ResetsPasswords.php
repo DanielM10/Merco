@@ -106,6 +106,10 @@ trait ResetsPasswords
 
         $user->FechaContraseña = $ldate = date('Y-m-d');
 
+        $user->Intentos_Bloqueo = 0;
+        
+        $user->Bloqueado='False';
+
         $user->setRememberToken(Str::random(60));
 
         $user->save();
