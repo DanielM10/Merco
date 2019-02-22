@@ -85,7 +85,8 @@ return view('usuario',compact('usuarios','internos','proveedores','proveedoresco
             'Activo' => $request->Activo2,
             'Bloqueado' => $request->Bloqueado2,
             'IdUCreo' => $request->IdUCreo,            
-            'Proveedor' => $request->Proveedor      
+            'Proveedor' => $request->Proveedor,
+            'FechaContraseña'=>$request->Fechacreous,
         ]);
 $user=$request->all();
         
@@ -138,7 +139,10 @@ $user=$request->all();
              $pass->update(
                 [                
                 'password'=>  bcrypt($request->pass),                              
-                ]
+                ],
+                [                
+                    'FechaContraseña'=>  $request->contraupdate,                              
+                    ]
             );   
             Session::flash('passupdate', 'Contraseña modificada correctamente.' );
             return redirect('usuario');

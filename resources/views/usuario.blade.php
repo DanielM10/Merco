@@ -196,6 +196,7 @@ $(document).on('click', '#Bloqueadoz', function (e) {
                                                                     <input type="checkbox" value="false" name="Bloqueado" id="Bloqueado">                                                                
                                                                 </div>
                                                                 <input type="hidden" name="Bloqueado2" value="false" id="Bloqueado2">
+                                                                <input type="hidden" name="Fechacreous" value="{{$ldate = date('Y-m-d')}}" id="Fechacreous">
                                                             </div>                                                                                                                       
                                                        
 
@@ -438,7 +439,8 @@ $(document).on('click', '#Bloqueadoz', function (e) {
                                                                 contraseña</label></div>
                                                         <div class="col-md-7 col-xs-12"><input type="password" name="passconf" id="passconf" class="form-control" />
                                                         </div>
-                                                    </div>                                                   
+                                                    </div>     
+                                                    <input type="hidden" name="contraupdate" value="{{$ldate = date('Y-m-d')}}" id="contraupdate">                                     
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
