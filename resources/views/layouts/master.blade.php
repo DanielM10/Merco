@@ -36,12 +36,7 @@
                 <script type="text/javascript" src="js/plugins/datatables/jquery.dataTables.min.js"></script>
                 <!-- END PAGE PLUGINS -->
 
-               <script type="text/javascript" src="js/plugins/jquery-validation/jquery.validate.js"></script>
-                <script type="text/javascript" src="js/plugins/knob/jquery.knob.min.js"></script>
-                <script type="text/javascript" src="js/plugins/owl/owl.carousel.min.js"></script>
-                <script type="text/javascript" src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
-                <script type="text/javascript" src="scripts/Mensajes.js"></script>
-                <script type="text/javascript" src="scripts/FuncionesGenerales.js"></script>
+               <script type="text/javascript" src="js/plugins/jquery-validation/jquery.validate.js"></script>               
                 
                 <!-- END THIS PAGE PLUGINS-->
 
@@ -55,9 +50,7 @@
     <!-- CSS INCLUDE -->
     <link rel="stylesheet" type="text/css" id="theme" href="css/theme-light.css" />
     <link rel="stylesheet" type="text/css" id="tema-secundario" href="css/colores.css" />
-    <link rel="stylesheet" type="text/css" id="tema-secundario" href="css/picker.min.css" />
-   
-    <link rel="stylesheet" type="text/css" id="tema-secundario" href="css/jquery/jquery-ui.min.css" />
+
     <!-- EOF CSS INCLUDE -->
 
 </head>

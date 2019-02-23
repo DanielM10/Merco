@@ -1,5 +1,4 @@
 @extends('layouts.master')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>                
 <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>                
                 
@@ -53,7 +52,17 @@ $(document).on('click', '#Bloqueadoz', function (e) {
                         debugger;
                 document.getElementById("muestraproveedores").removeAttribute("style");
             }
-                </script>            
+                </script>   
+                <script>
+                    ///PAGINADO DE TABLAS EN 25 ROWS
+                    $( document ).ready(function() {
+                        $("#tablenosort").dataTable().fnDestroy();
+                        $('#tablenosort').dataTable( {
+    "pageLength": 25
+});
+    });
+                    
+                </script>         
                 <!--SCRIPT PARA -->     
   <!-- PAGE TITLE -->
   <div class="page-title">
@@ -347,7 +356,7 @@ $(document).on('click', '#Bloqueadoz', function (e) {
 <!--FIN DEL FORM PARA EDITAR-->
                             <div class="panel-body">
 
-                                <table id="tablenosort" class="table table-striped datatable text">
+                                <table id="tablenosort" class="table table-striped datatable text" data-page-length='25'>
                                     <thead>
                                         <tr>
                                         <th hidden></th> 
