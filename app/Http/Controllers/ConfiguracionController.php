@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Configuracion;
 use Illuminate\Support\Facades\DB;
+use App\Mail\ConfigMail;
+use Illuminate\Support\Facades\Mail;
 class ConfiguracionController extends Controller
 {
     /**
@@ -123,8 +125,18 @@ class ConfiguracionController extends Controller
             'validation.email' => 'asdsad is required'
 
         ]);
-
-        if ($Configuracion1->fails()) {
+        $user=$request->all();        
+ Mail::to($request->usuario)->send(new ConfigMail($user));
+ $abc=count(Mail::failures());
+        if(count(Mail::failures()) > 0 ) {
+            Session::flash('errox', 'El hubo un problema al enviar el email' );
+            return back();       
+         } 
+         else if(count(Mail::failures()) > 0) {
+            Session::flash('msg', 'Datos guardados correctamente.' );
+            return back();
+         }
+       else if ($Configuracion1->fails()) {
             return redirect('configuracion')
                         ->withErrors($Configuracion1)
                         ->withInput();
