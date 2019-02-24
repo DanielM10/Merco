@@ -3943,7 +3943,9 @@ td.dataTables_empty {
   border: 0px;
   background: #f5f5f5;
   padding: 10px 15px;
-  color: #CCC;
+  /*color: #CCC;*/
+  color: #000;
+
   line-height: 20px;
   height: auto;
 }
