@@ -14,8 +14,7 @@
     
                 <!-- START SCRIPTS -->
                 <!-- START PLUGINS -->
-                <script type="text/javascript" src="js/jquery-3.3.1.js"></script>                
-                <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>                
+                <script type="text/javascript" src="js/jquery-3.3.1.js"></script>                                        
                 <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>            
                 <script type="text/javascript" src="js/plugins/moment.min.js"></script>
                 <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
@@ -106,7 +105,7 @@
                     </a>
                 </li>
                 <!-- END SIGN OUT -->
-                
+               
                 <!-- MESSAGES -->
                 <li class="xn-icon-button pull-right">
                     <a href="#" class="xn-principal"><span class="fa fa-file-text-o"></span></a>
@@ -141,6 +140,7 @@
                                                      class="fa fa-exchange"></span></a>
                                                         
                 </li>
+
                 
                 <!-- END TASKS -->
             </ul>

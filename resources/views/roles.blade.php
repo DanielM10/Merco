@@ -3,6 +3,7 @@
         <script type="text/javascript" src="js/jquery-3.3.1.js"></script>                
                 <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>                
                 <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>     
+              
                 <script>
                 $(document).on('click', '#Activox', function (e) {
     if ($('#Activox').prop('checked')) { $('#Activox').val(true);
@@ -43,7 +44,8 @@ $(document).on('click', '#Protegidox1', function (e) {
         $('#Protegido1').val(false);
     }
 })
-                </script>                  
+                </script>          
+                     
 @section('content')
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -54,6 +56,16 @@ $(document).on('click', '#Protegidox1', function (e) {
         </ul>
     </div>
 @endif
+<script>
+                    ///PAGINADO DE TABLAS EN 25 ROWS
+                    $( document ).ready(function() {
+                        $("#tableroles").dataTable().fnDestroy();
+                        $('#tableroles').dataTable( {
+    "pageLength": 25
+});
+    });
+                    
+                </script>   
 <div>
  <!-- PAGE TITLE -->
  <div class="page-title">
@@ -164,7 +176,7 @@ $(document).on('click', '#Protegidox1', function (e) {
                             
                             <div class="panel-body">
 
-                                <table class="table datatable text">
+                                <table id="tableroles" name="tableroles" class="table datatable text">
                                     <thead>
                                         <tr>
                                             <th hidden></th>              

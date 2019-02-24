@@ -23,7 +23,20 @@
       date_input.datepicker(options);
     })
 </script>
+<script>
+                    ///PAGINADO DE TABLAS EN 25 ROWS
+                    $( document ).ready(function() {
+                        $("#tableordenes").dataTable().fnDestroy();
+                        $('#tableordenes').dataTable( {
+    "pageLength": 25
+});
+    });
+                    
+                </script>  
   <!-- PAGE TITLE -->
+  @foreach($COMP as $com)
+  @endforeach
+
   <div class="page-title">
                 <h2 style="color:#FF802D;"><span class="fa fa-tasks"></span> Ordenes de compra</h2>
                 <div class="btn-group pull-right">
@@ -38,7 +51,6 @@
                                     width="24" /> PDF</a></li>
                         <li><a href="#" onclick="$('#customers2').tableExport({type:'pdf',escape:'false'});"><img src='img/icons/correo.jpg'
                                     width="24" /> CORREO</a></li>
-
                     </ul>
                 </div>
             </div>
@@ -69,7 +81,6 @@
 
 <div class="panel-body panel-body-open" id="accTwoColThree">
 <!--inicia-->
-
 <div class="row">    
 <form  action="/ordenescompra" method="GET" role="search">
         {{ csrf_field() }}                    
@@ -308,7 +319,7 @@ padding: 7px 10px;"><i class="fa fa-search"></i></button>
                                         <div class="col-md-12">
 <div class="panel panel-body">
                         <div class="panel-group table-responsive">
-                            <table class="table table-striped datatable text">
+                            <table id="tableordenes" name="tableordenes" class="table table-striped datatable text">
                                 <thead>
                                     <tr>
 
@@ -378,7 +389,7 @@ padding: 7px 10px;"><i class="fa fa-search"></i></button>
                                         <td>{{$ordencomprax->DescuentoTotal}}</td>
                                         <td class="resalta">{{$ordencomprax->Impuestos+$ordencomprax->Importe-$ordencomprax->DescuentoTotal}}</td>
                                         <td>@if($ordencomprax->Estatus='CONCLUIDO')<span class="fa fa-check btn-success btn-sm"></span>@elseif($ordencomprax->Estatus='PENDIENTE')<span class="fa fa-exclamation btn-warning btn-sm"></span>@elseif($ordencomprax->Estatus='CANCELADO')<span class="fa fa-times btn-danger btn-sm"></span>@endif</td>
-                                        <th><a href="detalleordenes?aa={{$ordencomprax->IdCompra}}" class="btn btn-default btn-sm fa fa-tasks"></a>
+                                        <th><a href="detalleordenes?aa={{$ordencomprax->IdCompra}}&&bb={{$ordencomprax->MovId}}&&cc={{$ordencomprax->Mov}}" class="btn btn-default btn-sm fa fa-tasks"></a>
                                         </th>
                                         <th><button class="btn btn-default btn-sm fa fa-pencil-square-o" data-toggle="modal"
                                                 data-target="#modal_large"></button>

@@ -1,7 +1,4 @@
-@extends('layouts.master')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script type="text/javascript" src="js/jquery-3.3.1.js"></script>                
-                <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>                
+@extends('layouts.master')                                       
                 <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>                    
 @section('content')
 @if ($errors->any())

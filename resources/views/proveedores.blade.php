@@ -15,7 +15,18 @@
     }
 })
 </script>
+    
 @section('content')
+<script>
+                    ///PAGINADO DE TABLAS EN 25 ROWS
+                    $( document ).ready(function() {
+                        $("#tableproveedores").dataTable().fnDestroy();
+                        $('#tableproveedores').dataTable( {
+    "pageLength": 25
+});
+    });
+                    
+                </script>  
 <!-- PAGE TITLE -->
 <div class="page-title">
                 <h2><span class="fa fa-building-o"></span> Proveedores</h2>
@@ -43,7 +54,7 @@
                         <!-- START DEFAULT DATATABLE -->
                         <div class="panel panel-default">
                         <div class="panel-heading">
-                            <table class="table table-striped datatable text">
+                            <table id="tableproveedores" name="tableproveedores" class="table table-striped datatable text">
                                 <thead>
                                     <tr>
                                         <th>No proveedor</th>

@@ -25,6 +25,15 @@
                     </ul>
                 </div>
             </div>
+            <script>
+                    ///PAGINADO DE TABLAS EN 25 ROWS
+                    $( document ).ready(function() {
+                        $("#tableentregas").dataTable().fnDestroy();
+                        $('#tableentregas').dataTable( {
+    "pageLength": 25
+});
+    });
+</script>                    
             <!-- END PAGE TITLE -->
 
             <!-- PAGE CONTENT WRAPPER -->
@@ -124,7 +133,7 @@ padding: 7px 10px;"><i class="fa fa-search"></i></button>
                                         <div class="col-md-12">
 <div class="panel panel-body">
                         <div class="panel-group table-responsive">
-                            <table class="table table-striped datatable text">
+                            <table name="tableentregas" id="tableentregas" class="table table-striped datatable text">
 
                                 <thead>
                                     <tr>
