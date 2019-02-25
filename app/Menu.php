@@ -1,7 +1,8 @@
 <?php
 
 namespace App;
-
+use Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Model
@@ -33,7 +34,14 @@ class Menu extends Model
     }
     public function optionsMenu()
     {
-        return $this->where('Activo', 1)
+        $id = Auth::id();
+        $menusi=  DB::table('UsuarioPermisos')
+        ->select('IdMenu')->where('IdUsuario','=',$id)->where('Ver','=',1)->pluck('IdMenu');
+        $menusi = $menusi->toArray();
+        $str = "'".implode("','", $menusi)."'";
+        return $this
+        ->whereIn('IdMenu',$menusi)
+        ->where('Activo',1)
             ->orderby('IdMenuPadre')
             ->orderby('Orden')
             ->orderby('Descipcion')

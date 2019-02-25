@@ -390,7 +390,9 @@ $(document).on('click', '#Bloqueadoz', function (e) {
                                                    <!--AQUI SE INCLUYEN LOS ARCHIVOS DE SESION Y EL FORM CON LA RUTA-->                                          
                                                    <form class="form-horizontal" action="{{route('updatepermisos')}}" method="post" name="permising" id="permising">
                                                             {{csrf_field()}}
+                                                           
                                             <div class="modal-body">
+                                            <input type="hidden" id="idusrper" name="idusrper" value="">
                                               @include('userpermisos')
                                             </div>
                                             <div class="modal-footer">

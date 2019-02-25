@@ -846,6 +846,4 @@
                 <!-- END PAGE CONTAINER -->
                 
             </div>
-
-           
 @endsection

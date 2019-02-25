@@ -104,15 +104,16 @@ $("#"+id).val(1);
                                                                         </th>
 
                                                                     </tr>
+                                                                    
                                                                 </thead>
-                                                                <tbody>
-                                                                @foreach($menusx as $menux)
+                                                                <tbody>                                                                
+                                                                @foreach($menusx as  $i => $menux)
                                                                 <tr>
                                                                 <td>{{$menux->Descipcion}}</td>
 
                                                                 <td>
                                                                             <label class="switch switch-small">
-                                                                                <input id="" class="acceder" onclick="switchero(this);" type="checkbox" checked value="0" />
+                                                                                <input name="menusx[{{ $i }}][acceder]" class="acceder" onclick="switchero(this);" type="checkbox" checked value="0" />
                                                                                 <span></span>
                                                                             </label>
                                                                         </td>

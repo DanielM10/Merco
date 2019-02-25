@@ -404,6 +404,15 @@ debugger;
     modal.find('.modal-body #idusr').val(id_user);      
 });
   </script>
+  <script>
+  debugger;
+   $('#modal_permisos').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) 
+    var id_useryo = button.data('usuarioidpermisos');
+    var modal = $(this); 
+    modal.find('.modal-body #idusrper').val(id_useryo);      
+});
+   </script>
 
 
  

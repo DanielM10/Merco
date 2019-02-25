@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Session;
 use Redirect;
 use Artisan;
+use Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Configuracion;
@@ -25,6 +26,21 @@ class ConfiguracionController extends Controller
     {
         //
           //
+          //verificamos si tiene permisos paraa 
+          $id = Auth::id();
+          $idpantalla=DB::table('Menu')
+          ->select('IdMenu')
+          ->where('Descipcion','=','Parametros del sistema')->first()->IdMenu;
+          $permisoeditar=DB::table('UsuarioPermisos')
+          ->select('Modificar')
+          ->where('IdMenu','=',$idpantalla)->first()->Modificar;
+          $permisoGuardar=DB::table('UsuarioPermisos')
+          ->select('Guardar')
+          ->where('IdMenu','=',$idpantalla)->first()->Guardar;
+          $permisoeliminar=DB::table('UsuarioPermisos')
+          ->select('Eliminar')
+          ->where('IdMenu','=',$idpantalla)->first()->Eliminar;
+
 //          $configuracion=Configuracion::orderBy('idConf','DESC')->paginate(20);
           $Configuracion1 = Configuracion::where('IdConf', 1)->first();
           $Configuracion2 = Configuracion::where('IdConf', 2)->first();
@@ -41,7 +57,7 @@ class ConfiguracionController extends Controller
 
           return view('Configuracion',compact('configuracion','Configuracion1','Configuracion2','Configuracion3'
           ,'Configuracion4','Configuracion5','Configuracion6','Configuracion7','Configuracion8',
-          'Configuracion9','Configuracion10','Configuracion11'
+          'Configuracion9','Configuracion10','Configuracion11','permisoeditar','permisoGuardar','permisoeliminar'
         )); 
     }
 
@@ -105,6 +121,25 @@ class ConfiguracionController extends Controller
      */
     public function update(Request $request)
     {
+        $id = Auth::id();
+          $idpantalla=DB::table('Menu')
+          ->select('IdMenu')
+          ->where('Descipcion','=','Parametros del sistema')->first()->IdMenu;
+          $permisoeditar=DB::table('UsuarioPermisos')
+          ->select('Modificar')
+          ->where('IdMenu','=',$idpantalla)->first()->Modificar;
+          $permisoGuardar=DB::table('UsuarioPermisos')
+          ->select('Guardar')
+          ->where('IdMenu','=',$idpantalla)->first()->Guardar;
+          $permisoeliminar=DB::table('UsuarioPermisos')
+          ->select('Eliminar')
+          ->where('IdMenu','=',$idpantalla)->first()->Eliminar;
+
+if($permisoeditar==0){
+    Session::flash('errorx', 'No tienes permisos para editar' );
+    return redirect()->back()->with('message', '');
+}
+
         $Configuracion1 = Validator::make($request->all(), [
             'servidor' => 'required',
             'puerto' => 'required|numeric',
