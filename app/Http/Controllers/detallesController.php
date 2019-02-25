@@ -35,6 +35,7 @@ $orden = DB::table('compra')
 ->join('Comprad','compra.idintelisis','=','comprad.id')
 ->join('ChequeWebDesgloseCompra','ChequeWebDesgloseCompra.idcompra','=','compra.idintelisis')
 ->where(['chequewebdesglosecompra.idcompra' => $int])
+->where('Mov','=','Orden Compra Super')
 ->get();
 
 $ordenescompradetalle = DB::table('compra')
@@ -45,6 +46,7 @@ DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,Fech
 ->join('Art','Art.articulo','=','comprad.articulo')
 ->join('prov','compra.proveedor','=','prov.proveedor')
 ->where(['chequewebdesglosecompra.idcompra' => $int])
+->where('Mov','=','Orden Compra Super')
 ->groupBy('COMPRA.idcompra','Comprad.IVA','Comprad.IEPS','comprad.articulo','prov.proveedor','prov.nombre','prov.direccion','prov.delegacion','prov.codigopostal','prov.estado','comprad.id','comprad.renglonid','comprad.cantidad','comprad.costo','comprad.impuesto1','comprad.impuesto2','comprad.impuesto3','comprad.descuentolinea','comprad.descuentoimporte','comprad.aplica','comprad.aplicaid','comprad.unidad','comprad.factor','comprad.cantidadinventario','comprad.importe'
 ,'art.descripcion1','compra.idintelisis','compra.empresa','compra.mov','compra.movid','compra.fechaemision','compra.ultimocambio','compra.concepto','compra.moneda','compra.tipocambio','compra.usuario','compra.referencia','compra.observaciones','compra.estatus','compra.proveedor','compra.formaenvio','compra.fecharequerida',
 'compra.almacen','compra.condicion','compra.descuentoglobal','compra.importe','compra.impuestos','compra.origentipo','compra.origen','compra.origenid','compra.sucursal'
@@ -59,6 +61,7 @@ DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,Fech
 ->join('Art','Art.articulo','=','comprad.articulo')
 ->join('prov','compra.proveedor','=','prov.proveedor')
 ->where(['chequewebdesglosecompra.idcompra' => $int])
+->where('Mov','=','Orden Compra Super')
 ->groupBy('COMPRA.idcompra','Comprad.IVA','Comprad.IEPS','comprad.articulo','prov.proveedor','prov.nombre','prov.direccion','prov.delegacion','prov.codigopostal','prov.estado','comprad.id','comprad.renglonid','comprad.cantidad','comprad.costo','comprad.impuesto1','comprad.impuesto2','comprad.impuesto3','comprad.descuentolinea','comprad.descuentoimporte','comprad.aplica','comprad.aplicaid','comprad.unidad','comprad.factor','comprad.cantidadinventario','comprad.importe'
 ,'art.descripcion1','compra.idintelisis','compra.empresa','compra.mov','compra.movid','compra.fechaemision','compra.ultimocambio','compra.concepto','compra.moneda','compra.tipocambio','compra.usuario','compra.referencia','compra.observaciones','compra.estatus','compra.proveedor','compra.formaenvio','compra.fecharequerida',
 'compra.almacen','compra.condicion','compra.descuentoglobal','compra.importe','compra.impuestos','compra.origentipo','compra.origen','compra.origenid','compra.sucursal'
@@ -73,6 +76,7 @@ DB::table('compra')
 ->join('ChequeWebDesgloseCompra','ChequeWebDesgloseCompra.idcompra','=','compra.idintelisis')
 ->join('Art','Art.articulo','=','comprad.articulo')
 ->where(['chequewebdesglosecompra.idcompra' => $int])
+->where('Mov','=','Orden Compra Super')
 ->get();
 $detalleieps=
 DB::table('compra')
@@ -81,6 +85,7 @@ DB::table('compra')
 ->join('ChequeWebDesgloseCompra','ChequeWebDesgloseCompra.idcompra','=','compra.idintelisis')
 ->join('Art','Art.articulo','=','comprad.articulo')
 ->where(['chequewebdesglosecompra.idcompra' => $int])
+->where('Mov','=','Orden Compra Super')
 ->get();
 
 
@@ -103,6 +108,7 @@ $orden = DB::table('compra')
 ->join('Comprad','compra.idintelisis','=','comprad.id')
 ->join('ChequeWebDesgloseCompra','ChequeWebDesgloseCompra.idcompra','=','compra.idintelisis')
 ->where(['chequewebdesglosecompra.idcompra' => $int])
+->where('Mov','=','Orden Compra Super')
 ->get();
 
 $ordenescompradetalle = DB::table('compra')
@@ -113,6 +119,7 @@ DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,Fech
 ->join('Art','Art.articulo','=','comprad.articulo')
 ->join('prov','compra.proveedor','=','prov.proveedor')
 ->where(['chequewebdesglosecompra.idcompra' => $int])
+->where('Mov','=','Orden Compra Super')
 ->groupBy('COMPRA.idcompra','Comprad.IVA','Comprad.IEPS','comprad.articulo','prov.proveedor','prov.nombre','prov.direccion','prov.delegacion','prov.codigopostal','prov.estado','comprad.id','comprad.renglonid','comprad.cantidad','comprad.costo','comprad.impuesto1','comprad.impuesto2','comprad.impuesto3','comprad.descuentolinea','comprad.descuentoimporte','comprad.aplica','comprad.aplicaid','comprad.unidad','comprad.factor','comprad.cantidadinventario','comprad.importe'
 ,'art.descripcion1','compra.idintelisis','compra.empresa','compra.mov','compra.movid','compra.fechaemision','compra.ultimocambio','compra.concepto','compra.moneda','compra.tipocambio','compra.usuario','compra.referencia','compra.observaciones','compra.estatus','compra.proveedor','compra.formaenvio','compra.fecharequerida',
 'compra.almacen','compra.condicion','compra.descuentoglobal','compra.importe','compra.impuestos','compra.origentipo','compra.origen','compra.origenid','compra.sucursal'
@@ -127,6 +134,7 @@ DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,Fech
 ->join('Art','Art.articulo','=','comprad.articulo')
 ->join('prov','compra.proveedor','=','prov.proveedor')
 ->where(['chequewebdesglosecompra.idcompra' => $int])
+->where('Mov','=','Orden Compra Super')
 ->groupBy('COMPRA.idcompra','Comprad.IVA','Comprad.IEPS','comprad.articulo','prov.proveedor','prov.nombre','prov.direccion','prov.delegacion','prov.codigopostal','prov.estado','comprad.id','comprad.renglonid','comprad.cantidad','comprad.costo','comprad.impuesto1','comprad.impuesto2','comprad.impuesto3','comprad.descuentolinea','comprad.descuentoimporte','comprad.aplica','comprad.aplicaid','comprad.unidad','comprad.factor','comprad.cantidadinventario','comprad.importe'
 ,'art.descripcion1','compra.idintelisis','compra.empresa','compra.mov','compra.movid','compra.fechaemision','compra.ultimocambio','compra.concepto','compra.moneda','compra.tipocambio','compra.usuario','compra.referencia','compra.observaciones','compra.estatus','compra.proveedor','compra.formaenvio','compra.fecharequerida',
 'compra.almacen','compra.condicion','compra.descuentoglobal','compra.importe','compra.impuestos','compra.origentipo','compra.origen','compra.origenid','compra.sucursal'
@@ -141,6 +149,7 @@ DB::table('compra')
 ->join('ChequeWebDesgloseCompra','ChequeWebDesgloseCompra.idcompra','=','compra.idintelisis')
 ->join('Art','Art.articulo','=','comprad.articulo')
 ->where(['compra.idintelisis' => $int])
+->where('Mov','=','Orden Compra Super')
 ->get();
 $detalleieps=
 DB::table('compra')
@@ -149,6 +158,7 @@ DB::table('compra')
 ->join('ChequeWebDesgloseCompra','ChequeWebDesgloseCompra.idcompra','=','compra.idintelisis')
 ->join('Art','Art.articulo','=','comprad.articulo')
 ->where(['chequewebdesglosecompra.idcompra' => $int])
+->where('Mov','=','Orden Compra Super')
 ->get();
 
 
