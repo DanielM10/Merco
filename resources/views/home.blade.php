@@ -509,10 +509,9 @@
                                         <tr>
                                         <TD></TD>
                                         <td>{{$ordencomprax2->MovID}}</td>
+                                        <td>{{$ordencomprax2->MovID}}</td>
                                         <td>{{$ordencomprax2->Mov}}</td>                                                                           
-                                        <td class="resalta">{{$ordencomprax2->FechaEmision}}</td>
-                                        <td>{{$ordencomprax2->FechaRequerida}}</td>
-                                        <td class="resalta">{{$ordencomprax2->Almacen}}</td>                                       
+                                        <td class="resalta">{{$ordencomprax2->FechaEmision}}</td>                                                                                                                   
                                                                                                                     
                                     </tr>
             
