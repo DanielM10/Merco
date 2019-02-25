@@ -60,6 +60,7 @@ if($urlperiodo==null&&$urlinputx==null&&$urlestatus==null&&$urlproveedor==null&&
     ->select('ChequeWebDesgloseCompra.*','compra.MOV','compra.MovId','compra.descuentoglobal as Descuentoglobal','compra.importe as Importe',
     DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,FechaRequerida) as FechaRequerida'),
     'estatus','Almacen','Impuestos')
+    ->where('Mov','=','Orden Compra Super')
     ->join('Compra','compra.id','=','ChequeWebDesgloseCompra.idcompra')
     ->take(1000)->get();
     $sucursales=Directorio::get();
@@ -73,6 +74,7 @@ if($urlperiodo==null&&$urlinputx==null&&$urlestatus==null&&$urlproveedor==null&&
     DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,FechaRequerida) as FechaRequerida'),
     'estatus','Almacen','Impuestos')
     ->join('Compra','compra.id','=','ChequeWebDesgloseCompra.idcompra')
+    ->where('Mov','=','Orden Compra Super')
     ->where('compra.proveedor','=',$provid)
     ->take(1000)->get();
     $sucursales=Directorio::get();
@@ -84,7 +86,8 @@ if(($urlperiodo!=null||$urlinputx!=null||$urlestatus!=null||$urlproveedor!=null|
     $query = DB::table('ChequeWebDesgloseCompra')
     ->select('ChequeWebDesgloseCompra.*','compra.MOV','compra.MovId','compra.importe as Importe',
     DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,FechaRequerida) as FechaRequerida'),
-    'estatus','Almacen','Impuestos')    
+    'estatus','Almacen','Impuestos')
+    ->where('Mov','=','Orden Compra Super')    
     ->join('Compra','compra.id','=','ChequeWebDesgloseCompra.idcompra');
 }
 //QUERY DINAMICO SI LOS CAMPOS NO ESTAN VACIOS PARA EL ADMIN
@@ -93,6 +96,7 @@ if($urlperiodo!=null||$urlinputx!=null||$urlestatus!=null||$urlproveedor!=null||
     ->select('ChequeWebDesgloseCompra.*','compra.MOV','compra.MovId','compra.importe as Importe',
     DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,FechaRequerida) as FechaRequerida'),
     'estatus','Almacen','Impuestos')
+    ->where('Mov','=','Orden Compra Super')
     ->join('Compra','compra.id','=','ChequeWebDesgloseCompra.idcompra');
 }
 //INICIO DE QUERY DINAMICO PARA ADMIN
