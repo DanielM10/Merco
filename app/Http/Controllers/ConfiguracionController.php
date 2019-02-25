@@ -22,24 +22,25 @@ class ConfiguracionController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
+    public function index(request $request)
     {
         //
           //
           //verificamos si tiene permisos paraa 
           $id = Auth::id();
+          $url=$request->path();
           $idpantalla=DB::table('Menu')
           ->select('IdMenu')
-          ->where('Descipcion','=','Parametros del sistema')->first()->IdMenu;
+          ->where('Controlador','=',$url)->first()->IdMenu;
           $permisoeditar=DB::table('UsuarioPermisos')
           ->select('Modificar')
-          ->where('IdMenu','=',$idpantalla)->first()->Modificar;
+          ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Modificar;
           $permisoGuardar=DB::table('UsuarioPermisos')
           ->select('Guardar')
-          ->where('IdMenu','=',$idpantalla)->first()->Guardar;
+          ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Guardar;
           $permisoeliminar=DB::table('UsuarioPermisos')
           ->select('Eliminar')
-          ->where('IdMenu','=',$idpantalla)->first()->Eliminar;
+          ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Eliminar;
 
 //          $configuracion=Configuracion::orderBy('idConf','DESC')->paginate(20);
           $Configuracion1 = Configuracion::where('IdConf', 1)->first();
@@ -122,22 +123,22 @@ class ConfiguracionController extends Controller
     public function update(Request $request)
     {
         $id = Auth::id();
-          $idpantalla=DB::table('Menu')
-          ->select('IdMenu')
-          ->where('Descipcion','=','Parametros del sistema')->first()->IdMenu;
-          $permisoeditar=DB::table('UsuarioPermisos')
-          ->select('Modificar')
-          ->where('IdMenu','=',$idpantalla)->first()->Modificar;
-          $permisoGuardar=DB::table('UsuarioPermisos')
-          ->select('Guardar')
-          ->where('IdMenu','=',$idpantalla)->first()->Guardar;
-          $permisoeliminar=DB::table('UsuarioPermisos')
-          ->select('Eliminar')
-          ->where('IdMenu','=',$idpantalla)->first()->Eliminar;
-
+        $url=$request->path();
+        $idpantalla=DB::table('Menu')
+        ->select('IdMenu')
+        ->where('Descipcion','=','Parametros del sistema')->first()->IdMenu;
+        $permisoeditar=DB::table('UsuarioPermisos')
+        ->select('Modificar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Modificar;
+        $permisoGuardar=DB::table('UsuarioPermisos')
+        ->select('Guardar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Guardar;
+        $permisoeliminar=DB::table('UsuarioPermisos')
+        ->select('Eliminar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Eliminar;
 if($permisoeditar==0){
-    Session::flash('errorx', 'No tienes permisos para editar' );
-    return redirect()->back()->with('message', '');
+    Session::flash('errox', 'No cuentas con permisos para editar.' );
+    return redirect()->back()->with('message','aaaaaaaaaaamalo');
 }
 
         $Configuracion1 = Validator::make($request->all(), [

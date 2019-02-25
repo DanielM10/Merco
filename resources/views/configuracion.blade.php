@@ -39,28 +39,29 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header bg-warning">
+      <div class="modal-header bg-warning" >
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h2 style="color:white;" class="modal-title">¡Advertencia!</h2>
+        <h2 style="color:#FFFFFF">¡Advertencia!</h2>
       </div>
       <div class="modal-body">
-      <div class='col-xs-3 col-sm-3 col-md-1 col-lg-3'>
-      <img class='TamanoImagen' src='img/Advertencia.png'/> 
-      </div>   
+      <div>
+      <img src='img/Advertencia.png' height="32" width="32"/> 
       <div style="font-size: 10px;" class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>
-      <strong>{{ Session::get('errorx') }}</strong>
+      <strong>{{ Session::get('errox') }}</strong>
       </div>  
       </div>
-      <br>
-      <br>
-      <br>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+</div>
+
+<br>
+<br>
+<br>
+      <div class="modal-footer bg-warning">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
       </div>
     </div>
-
+    </div>
   </div>
-</div>           
+</div> 
                                 @elseif(Session::has('msg'))     
                      <script>                    
     $(window).on('load',function(){
