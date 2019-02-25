@@ -572,7 +572,7 @@ padding: 7px 10px;"><i class="fa fa-search"></i></button>
                                 <tbody>
                                     <tr>
                                     @foreach ($pagos as $pago)  
-                                        <td>{{$pago->MovID}}</td>
+                                        <td>{{$pago->MovId}}</td>
                                         <td>{{$pago->Mov}}</td>
                                         <td>{{$pago->Nombre}}</td>
                                         <td>{{$pago->FechaEmision}}</td>
