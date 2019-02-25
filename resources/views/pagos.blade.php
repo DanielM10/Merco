@@ -570,8 +570,8 @@ padding: 7px 10px;"><i class="fa fa-search"></i></button>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
                                     @foreach ($pagos as $pago)  
+                                    <tr>
                                         <td>{{$pago->MovId}}</td>
                                         <td>{{$pago->Mov}}</td>
                                         <td>{{$pago->Nombre}}</td>
@@ -580,8 +580,8 @@ padding: 7px 10px;"><i class="fa fa-search"></i></button>
                                         <td></td>
                                         <td></td>
                                         <td></td>
+                                    </tr>
                                     @endforeach    
-                                </tr>
                                 </tbody>
                             </table>
                             <!--INICIO DE MODAL DE ACLARACIONES-->
