@@ -24,6 +24,15 @@
                     </ul>
                 </div>
             </div>
+            <script>
+                    ///PAGINADO DE TABLAS EN 25 ROWS
+                    $( document ).ready(function() {
+                        $("#tablepagos").dataTable().fnDestroy();
+                        $('#tablepagos').dataTable( {
+    "pageLength": 25
+});
+    });
+</script>            
             <!-- END PAGE TITLE -->
 
             <!-- PAGE CONTENT WRAPPER -->
@@ -157,7 +166,7 @@ padding: 7px 10px;"><i class="fa fa-search"></i></button>
                                                                 </li>
                                                             </ul>
                                                             <div id="step-1">
-                                                                <table class="table text">
+                                                                <table id="pagos" name="pagos" class="table text">
                                                                     <tbody>
                                                                         <tr>
                                                                             <th>Fecha de orden: 21/08/2018</th>

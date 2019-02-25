@@ -3,6 +3,7 @@
         <script type="text/javascript" src="js/jquery-3.3.1.js"></script>                
                 <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>                
                 <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>     
+              
                 <script>
                 $(document).on('click', '#Activox', function (e) {
     if ($('#Activox').prop('checked')) { $('#Activox').val(true);
@@ -43,7 +44,8 @@ $(document).on('click', '#Protegidox1', function (e) {
         $('#Protegido1').val(false);
     }
 })
-                </script>                  
+                </script>          
+                     
 @section('content')
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -54,6 +56,16 @@ $(document).on('click', '#Protegidox1', function (e) {
         </ul>
     </div>
 @endif
+<script>
+                    ///PAGINADO DE TABLAS EN 25 ROWS
+                    $( document ).ready(function() {
+                        $("#tableroles").dataTable().fnDestroy();
+                        $('#tableroles').dataTable( {
+    "pageLength": 25
+});
+    });
+                    
+                </script>   
 <div>
  <!-- PAGE TITLE -->
  <div class="page-title">
@@ -164,7 +176,7 @@ $(document).on('click', '#Protegidox1', function (e) {
                             
                             <div class="panel-body">
 
-                                <table class="table datatable text">
+                                <table id="tableroles" name="tableroles" class="table datatable text">
                                     <thead>
                                         <tr>
                                             <th hidden></th>              
@@ -443,10 +455,12 @@ $(document).on('click', '#Protegidox1', function (e) {
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h2 class="modal-title">¡Exito!</h2>
       </div>
-      <div class="modal-body">       
-      <div style="font-size: 15px;" class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>
-      <img src='img/exito.png' height="32" width="32"/>
+      <div class="modal-body">
+      <div>
+      <img src='img/exito.png' height="32" width="32"/> 
+      <div style="font-size: 10px;" class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>
       <strong>{{ Session::get('modifik') }}</strong>
+      </div>  
       </div>
 </div>
 
@@ -459,7 +473,8 @@ $(document).on('click', '#Protegidox1', function (e) {
     </div>
     </div>
   </div>
-</div>                                                      
+</div> 
+                                           
             @endif    
                  <!--MODAL PARA BORRAR-->
     <div class="modal" id="borrar" tabindex="-1"  class="modal fade bd-example-modal-sm" role="dialog">
@@ -527,10 +542,10 @@ $(document).on('click', '#Protegidox1', function (e) {
                                 @if(Session::has('addk'))     
                      <script>                    
     $(window).on('load',function(){
-        $('#myModal').modal('show');
+        $('#myModal7').modal('show');
     });
                      </script>
-<div id="myModal" class="modal fade bd-example-modal-sm" role="dialog">
+<div id="myModal7" class="modal fade bd-example-modal-sm" role="dialog">
   <div class="modal-dialog modal-sm">
 
     <!-- Modal content-->
@@ -539,11 +554,12 @@ $(document).on('click', '#Protegidox1', function (e) {
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h2 class="modal-title">¡Exito!</h2>
       </div>
-      <div class="modal-body">       
-      <div style="font-size: 15px;" class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>
-      <img src='img/exito.png' height="42" width="42"/>
+      <div class="modal-body">
+      <div>
+      <img src='img/exito.png' height="32" width="32"/> 
+      <div style="font-size: 10px;" class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>
       <strong>{{ Session::get('addk') }}</strong>
-     
+      </div>  
       </div>
 </div>
 
@@ -557,8 +573,7 @@ $(document).on('click', '#Protegidox1', function (e) {
     </div>
   </div>
 </div> 
-                             
-                                     
+          
             @endif
             @if(Session::has('errorrol'))     
                      <script>                    

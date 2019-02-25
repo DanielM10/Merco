@@ -14,8 +14,7 @@
     
                 <!-- START SCRIPTS -->
                 <!-- START PLUGINS -->
-                <script type="text/javascript" src="js/jquery-3.3.1.js"></script>                
-                <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>                
+                <script type="text/javascript" src="js/jquery-3.3.1.js"></script>                                        
                 <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>            
                 <script type="text/javascript" src="js/plugins/moment.min.js"></script>
                 <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
@@ -36,12 +35,7 @@
                 <script type="text/javascript" src="js/plugins/datatables/jquery.dataTables.min.js"></script>
                 <!-- END PAGE PLUGINS -->
 
-               <script type="text/javascript" src="js/plugins/jquery-validation/jquery.validate.js"></script>
-                <script type="text/javascript" src="js/plugins/knob/jquery.knob.min.js"></script>
-                <script type="text/javascript" src="js/plugins/owl/owl.carousel.min.js"></script>
-                <script type="text/javascript" src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
-                <script type="text/javascript" src="scripts/Mensajes.js"></script>
-                <script type="text/javascript" src="scripts/FuncionesGenerales.js"></script>
+               <script type="text/javascript" src="js/plugins/jquery-validation/jquery.validate.js"></script>               
                 
                 <!-- END THIS PAGE PLUGINS-->
 
@@ -55,9 +49,7 @@
     <!-- CSS INCLUDE -->
     <link rel="stylesheet" type="text/css" id="theme" href="css/theme-light.css" />
     <link rel="stylesheet" type="text/css" id="tema-secundario" href="css/colores.css" />
-    <link rel="stylesheet" type="text/css" id="tema-secundario" href="css/picker.min.css" />
-   
-    <link rel="stylesheet" type="text/css" id="tema-secundario" href="css/jquery/jquery-ui.min.css" />
+
     <!-- EOF CSS INCLUDE -->
 
 </head>
@@ -113,7 +105,7 @@
                     </a>
                 </li>
                 <!-- END SIGN OUT -->
-                
+               
                 <!-- MESSAGES -->
                 <li class="xn-icon-button pull-right">
                     <a href="#" class="xn-principal"><span class="fa fa-file-text-o"></span></a>
@@ -148,6 +140,7 @@
                                                      class="fa fa-exchange"></span></a>
                                                         
                 </li>
+
                 
                 <!-- END TASKS -->
             </ul>

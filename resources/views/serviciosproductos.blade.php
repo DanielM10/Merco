@@ -4,6 +4,16 @@
                 <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>                
                 <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>     
 @section('content')
+<script>
+                    ///PAGINADO DE TABLAS EN 25 ROWS
+                    $( document ).ready(function() {
+                        $("#tableproductos").dataTable().fnDestroy();
+                        $('#tableproductos').dataTable( {
+    "pageLength": 25
+});
+    });
+                    
+                </script>  
   <!-- PAGE TITLE -->
   <div class="page-title">
                 <h2 class="naranja"><span class="fa fa-wrench"></span> Productos</h2>
@@ -98,7 +108,7 @@
                             </div>
                             <div class="panel-body">
 
-                                <table class="table table-striped datatable text">
+                                <table id="tableproductos" name="tableproductos" class="table table-striped datatable text">
                                     <thead>
                                         <tr>
                                             <th>Proveedor</th>

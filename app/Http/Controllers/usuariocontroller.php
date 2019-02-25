@@ -62,12 +62,7 @@ return view('usuario',compact('usuarios','internos','proveedores','proveedoresco
     public function store(Request $request){
          $num = mt_rand(100000,999999); 
         $emailverify=User::select(['email'=> $request->email])->where(['email'=>$request->email])->count();
-        $verifynumepleado=User::select(['NumEmpleado'=> $request->NumEmpleado])->where(['NumEmpleado'=>$request->NumEmpleado])->count();
-        if($verifynumepleado!=0){
-            Session::flash('passnotupdate', 'Se encuentra repetido el mismo número de empleado' );
-            return back();
-        }
-        else if($emailverify!=0){
+        if($emailverify!=0){
             Session::flash('passnotupdate', 'Ya hay un usuario registrado con ese mail' );
             return back();
         }
@@ -79,8 +74,7 @@ return view('usuario',compact('usuarios','internos','proveedores','proveedoresco
             'password'=>bcrypt($request->password),
             'name' => $request->name,
             'ApPaterno' => $request->ApPaterno,
-            'ApMaterno' => $request->ApMaterno,
-            'NumEmpleado' => $request->NumEmpleado,  
+            'ApMaterno' => $request->ApMaterno,       
             'idrol' => $request->Rol,
             'Activo' => $request->Activo2,
             'Bloqueado' => $request->Bloqueado2,
@@ -161,19 +155,11 @@ $user=$request->all();
         $validadoremail=User::select('email', '=', $request->email )
         ->where('id', '=', $request->iduser)->count();
         $validadoremail2=User::select('email', '!=', $request->email )
-        ->count();
-        $validadoridempleado=User::select('Numempleado', '=', $request->NumEmpleado)
-        ->where('id', '=', $request->iduser)->count();        
-        $validadoridempleado2=User::select('Numempleado', '!=', $request->NumEmpleado)
         ->count();        
         if ($validadoremail==1 and $validadoremail2==0) {
             Session::flash('erroruser', 'El email ya se encuentra registrado.' );
             return redirect('usuario');
-        }
-        elseif($validadoridempleado==1 and $validadoridempleado2==0){
-            Session::flash('erroruser', 'El numero de empleado ya se encuentra registrado' );
-            return redirect('usuario');
-        }        
+        }          
         else{
          $pass = User::where(
             [
@@ -187,8 +173,7 @@ $user=$request->all();
             'email'=> $request->email,          
             'name' => $request->name,
             'ApPaterno' => $request->ApPaterno,
-            'ApMaterno' => $request->ApMaterno,
-            'NumEmpleado' => $request->NumEmpleado,              
+            'ApMaterno' => $request->ApMaterno,                     
             'Activo' => $request->Activo1,
             'Bloqueado' => $request->Bloqueado1,
             'IdUMod' => $request->IdUMod,            

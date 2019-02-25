@@ -1,5 +1,4 @@
 @extends('layouts.master')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>                
 <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>                
                 
@@ -53,7 +52,17 @@ $(document).on('click', '#Bloqueadoz', function (e) {
                         debugger;
                 document.getElementById("muestraproveedores").removeAttribute("style");
             }
-                </script>            
+                </script>   
+                <script>
+                    ///PAGINADO DE TABLAS EN 25 ROWS
+                    $( document ).ready(function() {
+                        $("#tablenosort").dataTable().fnDestroy();
+                        $('#tablenosort').dataTable( {
+    "pageLength": 25
+});
+    });
+                    
+                </script>         
                 <!--SCRIPT PARA -->     
   <!-- PAGE TITLE -->
   <div class="page-title">
@@ -111,7 +120,7 @@ $(document).on('click', '#Bloqueadoz', function (e) {
                                                                 </div>
                                                             </div>-->
                                                             <div class="form-group">
-                                                            <label class="col-md-3 col-xs-12 control-label">Tipo de usuario</label>
+                                                            <label class="col-md-3 col-xs-12 control-label">Roles de usuario</label>
                                                             <div class="col-md-6">
                                                             <select class="form-control" name="tiporol" id="tiporol" required>
                                                                         <option selected="selected">--Seleccione--</option>
@@ -162,13 +171,7 @@ $(document).on('click', '#Bloqueadoz', function (e) {
                                                                 <div class="col-md-6 col-xs-12">
                                                                     <input type="text" name="ApMaterno" id="ApMaterno" class="form-control" required/>
                                                                 </div>
-                                                            </div>       
-                                                            <div class="form-group">
-                                                                <label class="col-md-3 col-xs-12 control-label">Numero de Empleado</label>
-                                                                <div class="col-md-6 col-xs-12">
-                                                                    <input type="number" name="NumEmpleado" id="NumEmpleado" class="form-control" required/>
-                                                                </div>
-                                                            </div>                                                                                                        
+                                                            </div>                                                                                                                                                                          
                                                             <div class="form-group">
                                                                 <label class="col-md-3 col-xs-12 control-label">Correo
                                                                     electrónico</label>
@@ -243,7 +246,7 @@ $(document).on('click', '#Bloqueadoz', function (e) {
                                                     <div class="col-md-12">
                                                     <div class="form-group">
                                                            
-                                                            <label class="col-md-3 col-xs-12 control-label">Tipo de usuario</label>
+                                                            <label class="col-md-3 col-xs-12 control-label">Roles de usuario</label>
                                                             <div class="col-md-6">
                                                             <select class="form-control" name="tiporol1" id="tiporol1" required>
                                                                         <option selected="selected">--Seleccione--</option>
@@ -296,13 +299,7 @@ $(document).on('click', '#Bloqueadoz', function (e) {
                                                                 <div class="col-md-6 col-xs-12">
                                                                     <input type="text" name="ApMaterno" id="ApMaterno" class="form-control" required/>
                                                                 </div>
-                                                            </div>       
-                                                            <div class="form-group">
-                                                                <label class="col-md-3 col-xs-12 control-label">Numero de Empleado</label>
-                                                                <div class="col-md-6 col-xs-12">
-                                                                    <input type="number" name="NumEmpleado" id="NumEmpleado" class="form-control" required/>
-                                                                </div>
-                                                            </div>                                                                                                        
+                                                            </div>                                                                                                                                                                    
                                                             <div class="form-group">
                                                                 <label class="col-md-3 col-xs-12 control-label">Correo
                                                                     electrónico</label>
@@ -347,13 +344,13 @@ $(document).on('click', '#Bloqueadoz', function (e) {
 <!--FIN DEL FORM PARA EDITAR-->
                             <div class="panel-body">
 
-                                <table id="tablenosort" class="table table-striped datatable text">
+                                <table id="tablenosort" class="table table-striped datatable text" data-page-length='25'>
                                     <thead>
                                         <tr>
                                         <th hidden></th> 
                                             <th class="col-md-3 col-xs-12">Nombre</th>
                                             <th>Correo electrónico</th>
-                                            <th>Tipo de usuario</th>                                           
+                                            <th>Rol de usuario</th>                                           
                                             <th>Activo</th>
                                             <th>Editar</th>
                                            <th>Permisos</th>
@@ -471,10 +468,12 @@ $(document).on('click', '#Bloqueadoz', function (e) {
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h2 class="modal-title">¡Exito!</h2>
       </div>
-      <div class="modal-body">       
-      <div style="font-size: 15px;" class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>
-      <img style="float:left" src='img/exito.png' height="32" width="32"/>
+      <div class="modal-body">
+      <div>
+      <img src='img/exito.png' height="32" width="32"/> 
+      <div style="font-size: 10px;" class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>
       <strong>{{ Session::get('modificaruser') }}</strong>
+      </div>  
       </div>
 </div>
 
@@ -487,7 +486,7 @@ $(document).on('click', '#Bloqueadoz', function (e) {
     </div>
     </div>
   </div>
-</div>                                                      
+</div>                                        
             @endif    
             @if(Session::has('adduser'))     
                      <script>                    
@@ -504,11 +503,12 @@ $(document).on('click', '#Bloqueadoz', function (e) {
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h2 class="modal-title">¡Exito!</h2>
       </div>
-      <div class="modal-body">       
+      <div class="modal-body">
+      <div>
+      <img src='img/exito.png' height="32" width="32"/> 
       <div style="font-size: 10px;" class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>
-      <img style="float:left" src='img/exito.png' height="32" width="32"/>
-      <p><strong>{{ Session::get('adduser') }}</strong></p>
-     
+      <strong>{{ Session::get('adduser') }}</strong>
+      </div>  
       </div>
 </div>
 
@@ -522,8 +522,6 @@ $(document).on('click', '#Bloqueadoz', function (e) {
     </div>
   </div>
 </div> 
-                             
-                                     
             @endif
                    <!-- FIN DE MODAL PARA BORRAR-->
                    @if(Session::has('erroruser'))     
