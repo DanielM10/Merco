@@ -559,10 +559,10 @@ padding: 7px 10px;"><i class="fa fa-search"></i></button>
                             <table class="table table-striped datatable text">
                                 <thead>
                                     <tr>
-                                        <th>No. Pago</th>
+                                        <th>Folio</th>
+                                        <th>Movimiento</th>
                                         <th>Proveedor</th>
                                         <th>Fecha</th>
-                                        <th>Forma de pago</th>
                                         <th>Total</th>
                                         <th>Estatus</th>
                                         <th>Desglose pago</th>
@@ -570,26 +570,18 @@ padding: 7px 10px;"><i class="fa fa-search"></i></button>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
+                                    <tr>
+                                    @foreach ($pagos as $pago)  
+                                        <td>{{$pago->MovID}}</td>
+                                        <td>{{$pago->Mov}}</td>
+                                        <td>{{$pago->Nombre}}</td>
+                                        <td>{{$pago->FechaEmision}}</td>
+                                        <td>{{$pago->Importe}}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    @endforeach    
                                 </tr>
-                              
-                         
                                 </tbody>
                             </table>
                             <!--INICIO DE MODAL DE ACLARACIONES-->
