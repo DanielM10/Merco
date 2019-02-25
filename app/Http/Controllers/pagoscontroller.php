@@ -35,7 +35,6 @@ class pagoscontroller extends Controller
                     ->join('Prov','Prov.Proveedor','=','CxpWebPortalProveedor.prov')
                     // ->where('cxp.Estatus','=','Pendiente')
                     ->get();
-        var_dump($pagos); exit();
         return view('pagos', compact('pagos'));
     }
 }
