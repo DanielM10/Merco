@@ -9,7 +9,7 @@ class Cxp extends Model
     protected $table = 'Cxp';
 
     protected $fillable = [
-        'ID' => 'required'
+        'idintelisis' => 'required'
         ,'Empresa' => 'required'
         ,'Mov' => 'required'
         ,'MovID' => 'required'
