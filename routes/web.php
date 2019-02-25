@@ -39,6 +39,7 @@ Route::post('login2', 'Auth\LoginController@postLogin');
 //-----------------------------RUTA PARA CAMBIO DE PASSWORD PER USER-------------------
 Route::get('cambiopass','usuariocontroller@cambiopass')->name('cambiopass');
 Route::post('usuarioedit2','usuarioController@update2')->name('usuarioedit2');
+Route::post('usuariopermisos','usuarioController@updatepermisos')->name('updatepermisos');
 //---------------------------------------------------------------------------------//
 //---------------------------RUTAS PARA ACCIONES DE CONFIGURACION----------------------------------------//
 Route::get('configuracion', 'configuracioncontroller@index');

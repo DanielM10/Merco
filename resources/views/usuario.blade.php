@@ -140,7 +140,7 @@ $(document).on('click', '#Bloqueadoz', function (e) {
                                                             <div class="form-group content" name="View1" id="View1">
                                                                 <label class="col-md-3 col-xs-12 control-label">Proveedor</label>
                                                                 <div class="col-md-6">
-                                                                    <select class="form-control" id="Proveedor" name="Proveedor">
+                                                                    <select class="form-control select col-md-5 col-xs-12"  data-live-search="true" id="Proveedor" name="Proveedor">
                                                                         <option selected="selected" value="">--Seleccione--</option>  
                                                                         @foreach($proveedorescombo as $proveedorcombo)  
                                                                         <option value="{{$proveedorcombo->Proveedor}}">{{$proveedorcombo->Nombre}}</option>  
@@ -387,14 +387,14 @@ $(document).on('click', '#Bloqueadoz', function (e) {
                                                         aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                                 <h4 class="modal-title" id="largeModalHead2">Permisos por usuario</h4>
                                             </div>
-                                                   <!--AQUI SE INCLUYEN LOS ARCHIVOS DE SESION Y EL FORM CON LA RUTA-->
-                                            <form class="form-horizontal" action="{{route('configuracionupdate')}}" method="post">
-                                            {{ csrf_field() }}
+                                                   <!--AQUI SE INCLUYEN LOS ARCHIVOS DE SESION Y EL FORM CON LA RUTA-->                                          
+                                                   <form class="form-horizontal" action="{{route('updatepermisos')}}" method="post" name="permising" id="permising">
+                                                            {{csrf_field()}}
                                             <div class="modal-body">
                                               @include('userpermisos')
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Guardar</button>
+                                                <button type="submit" class="btn btn-success" >Guardar</button>
                                             </div>
                                             </form>
                                             <!---AQUI TERMINA EL FORM DEL METODO-->
@@ -427,14 +427,14 @@ $(document).on('click', '#Bloqueadoz', function (e) {
 
                                                         <div class="col-md-4 col-xs-12"><label class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;Nueva
                                                                 contraseña</label></div>
-                                                        <div class="col-md-7 col-xs-12"><input type="password" name="pass" id="pass" class="form-control" />
+                                                        <div class="col-md-7 col-xs-12"><input type="password" maxlength="{{$longpass}}" name="pass" id="pass" class="form-control" />
                                                         </div><br /><br />
                                                     </div>
                                                     <div class="form-group">
 
                                                         <div class="col-md-4 col-xs-12"><label class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;Confirmar
                                                                 contraseña</label></div>
-                                                        <div class="col-md-7 col-xs-12"><input type="password" name="passconf" id="passconf" class="form-control" />
+                                                        <div class="col-md-7 col-xs-12"><input type="password" maxlength="{{$longpass}}" name="passconf" id="passconf" class="form-control" />
                                                         </div>
                                                     </div>     
                                                     <input type="hidden" name="contraupdate" value="{{$ldate = date('Y-m-d')}}" id="contraupdate">                                     

@@ -6,6 +6,7 @@ use Redirect;
 use App\Rol;
 use App\Proveedor;
 use App\User;
+use App\Menu;
 use Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -54,7 +55,9 @@ class usuariocontroller extends Controller
         $proveedores =Rol::where('TipoRol', '=', 'Proveedor')->where('Activo','=','True')                     
         ->get();
         $proveedorescombo=Proveedor::where('Activo','=','True')->get();
-return view('usuario',compact('usuarios','internos','proveedores','proveedorescombo'));    
+        $menusx=Menu::where('Activo','=','True')->get();
+        $longpass=DB::table('Configuracion')->select('Valor')->where('Descripcion','=','Caracteres Minimos')->first()->Valor;
+return view('usuario',compact('usuarios','internos','proveedores','proveedorescombo','menusx','longpass'));    
     }
     public function create(){
         return view('usuario');
@@ -82,6 +85,19 @@ return view('usuario',compact('usuarios','internos','proveedores','proveedoresco
             'Proveedor' => $request->Proveedor,
             'FechaContraseña'=>$request->Fechacreous,
         ]);
+$idxusuario=DB::table('users')->where('email','=',$request->email)->first()->id;      
+$user3=DB::table('Menu')->where('Activo','=','True')->get();
+foreach($user3 as $usuario){
+    DB::table('UsuarioPermisos')->insert([
+        'IdMenu'=>$usuario->IdMenu,
+        'IdUsuario'=>$idxusuario,
+        'Ver'=>1,
+        'Guardar'=>1,
+        'Modificar'=>1,
+        'Eliminar'=>1,
+    ]);
+}
+
 $user=$request->all();
         
 
@@ -230,5 +246,9 @@ $user=$request->all();
            else if($checkhash==false)   
            Session::flash('passnotupdate', 'La contraseña anterior no coincide' );
            return redirect('cambiopass');
+    }
+    public function updatepermisos(){
+        Session::flash('passupdate', 'Permisos modificados correctamente.' );
+            return redirect()->back();
     }
 }
