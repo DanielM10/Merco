@@ -31,7 +31,7 @@ class HomeController extends Controller
         ->select('ChequeWebDesgloseCompra.*','compra.importe as Importe',DB::raw('CONVERT(date,UltimoCambio) as UltimoCambio'),
         DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,FechaRequerida) as FechaRequerida'),
         'estatus','Almacen','Impuestos')
-        ->join('Compra','compra.idintelisis','=','ChequeWebDesgloseCompra.idcompra')
+        ->join('Compra','compra.IdIntelisis','=','ChequeWebDesgloseCompra.idcompra')
         ->take(3)->get();
 
         $counttotal2 = DB::table('cxp')->count();

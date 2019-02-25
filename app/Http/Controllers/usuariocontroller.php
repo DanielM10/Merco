@@ -54,7 +54,7 @@ class usuariocontroller extends Controller
         //QUERY ORIGINAL
         $proveedores =Rol::where('TipoRol', '=', 'Proveedor')->where('Activo','=','True')                     
         ->get();
-        $proveedorescombo=Proveedor::where('Activo','=','True')->get();
+        $proveedorescombo=Proveedor::where('Estatus','=','Alta')->get();
         $menusx=Menu::where('Activo','=','True')->get();
         $longpass=DB::table('Configuracion')->select('Valor')->where('Descripcion','=','Caracteres Minimos')->first()->Valor;
 return view('usuario',compact('usuarios','internos','proveedores','proveedorescombo','menusx','longpass'));    
