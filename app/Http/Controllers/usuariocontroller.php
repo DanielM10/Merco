@@ -63,6 +63,26 @@ return view('usuario',compact('usuarios','internos','proveedores','proveedoresco
         return view('usuario');
     }
     public function store(Request $request){
+        $id = Auth::id();
+        $url=$request->path();
+        $idpantalla=DB::table('Menu')
+        ->select('IdMenu')
+        ->where('Descipcion','=','Usuarios')->first()->IdMenu;
+        $permisoeditar=DB::table('UsuarioPermisos')
+        ->select('Modificar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Modificar;
+        $permisoGuardar=DB::table('UsuarioPermisos')
+        ->select('Guardar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Guardar;
+        $permisoeliminar=DB::table('UsuarioPermisos')
+        ->select('Eliminar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Eliminar;
+if($permisoGuardar==0){
+    Session::flash('passnotupdate', 'No cuentas con permisos para editar.' );
+    return redirect('usuario');
+}
+
+
          $num = mt_rand(100000,999999); 
         $emailverify=User::select(['email'=> $request->email])->where(['email'=>$request->email])->count();
         if($emailverify!=0){
@@ -116,6 +136,9 @@ $user=$request->all();
     }
     }
     public function passupdate(Request $request){
+
+
+        
         $user1 = User::where('id','=',$request->idusrx)->get()->first();
         $passnormal=User::where([
             'id' => $request->idusrx            
@@ -165,6 +188,26 @@ $user=$request->all();
     }
     public function update(Request $request)
     {
+        $id = Auth::id();
+        $url=$request->path();
+        $idpantalla=DB::table('Menu')
+        ->select('IdMenu')
+        ->where('Descipcion','=','Usuarios')->first()->IdMenu;
+        $permisoeditar=DB::table('UsuarioPermisos')
+        ->select('Modificar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Modificar;
+        $permisoGuardar=DB::table('UsuarioPermisos')
+        ->select('Guardar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Guardar;
+        $permisoeliminar=DB::table('UsuarioPermisos')
+        ->select('Eliminar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Eliminar;
+if($permisoeditar==0){
+    Session::flash('passnotupdate', 'No cuentas con permisos para editar.' );
+    return redirect('usuario');
+}
+
+
         $usersx = Validator::make($request->all(), [
             'id' => 'required'               
         ]);

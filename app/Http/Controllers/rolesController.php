@@ -46,6 +46,27 @@ return view('roles', ['users' => $users]);
      */
     public function store(Request $request)
     {
+        $id = Auth::id();
+        $url=$request->path();
+        $idpantalla=DB::table('Menu')
+        ->select('IdMenu')
+        ->where('Descipcion','=','Parametros del sistema')->first()->IdMenu;
+        $permisoeditar=DB::table('UsuarioPermisos')
+        ->select('Modificar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Modificar;
+        $permisoGuardar=DB::table('UsuarioPermisos')
+        ->select('Guardar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Guardar;
+        $permisoeliminar=DB::table('UsuarioPermisos')
+        ->select('Eliminar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Eliminar;
+if($permisoGuardar==0){
+    Session::flash('errorrol', 'No cuentas con permisos para Guardar.' );
+    return redirect('roles')->back()->with('message','aaaaaaaaaaamalo');
+}
+
+
+        
         $usersx = Validator::make($request->all(), [
             'TipoRol' => 'required',
             'Nombre' => 'required',          
@@ -53,7 +74,7 @@ return view('roles', ['users' => $users]);
         ]);
         $validationnombre=Rol::where('Nombre','=',$request->Nombre)->count();
         //aqui verificamos que no exista
-        if($validationnombre!=0){
+       if($validationnombre!=0){
             Session::flash('errorrol', 'Ya existe un usuario con este nombre.' );
             return back();
         }
@@ -101,6 +122,25 @@ else{
      */
     public function update(Request $request)
     {
+        $id = Auth::id();
+        $url=$request->path();
+        $idpantalla=DB::table('Menu')
+        ->select('IdMenu')
+        ->where('Descipcion','=','Roles de usuario')->first()->IdMenu;
+        $permisoeditar=DB::table('UsuarioPermisos')
+        ->select('Modificar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Modificar;
+        $permisoGuardar=DB::table('UsuarioPermisos')
+        ->select('Guardar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Guardar;
+        $permisoeliminar=DB::table('UsuarioPermisos')
+        ->select('Eliminar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Eliminar;
+if($permisoeditar==0){
+    Session::flash('errorrol', 'No cuentas con permisos para editar.' );
+    return redirect('roles')->back()->with('message','aaaaaaaaaaamalo');
+}
+
         $usersx = Validator::make($request->all(), [
             'TipoRol' => 'required',
             'Nombre' => 'required',          

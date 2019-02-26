@@ -126,6 +126,21 @@ DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,Fech
 ,'ChequeWebDesgloseCompra.Mov','ChequeWebDesgloseCompra.MovID','ChequeWebDesgloseCompra.IdCompra','ChequeWebDesgloseCompra.DescuentoTotal','ChequeWebDesgloseCompra.DescuentoCedis','ChequeWebDesgloseCompra.DescuentoPublicidad'
 )
 ->get();
+$ordenescompradetalle = DB::table('compra')
+->select('prov.proveedor','prov.nombre as provnombre','prov.direccion as provdireccion','prov.delegacion as provdelegacion','prov.codigopostal as provcodigopostal','prov.estado as provestado','Comprad.*','Art.descripcion1 as Descripcion1','compra.*','ChequeWebDesgloseCompra.*',
+DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,FechaRequerida) as FechaRequerida'),DB::raw('ROUND(comprad.importe,2) as importein'))
+->join('Comprad','compra.idintelisis','=','comprad.id')
+->join('ChequeWebDesgloseCompra','ChequeWebDesgloseCompra.idcompra','=','compra.idintelisis')
+->join('Art','Art.articulo','=','comprad.articulo')
+->join('prov','compra.proveedor','=','prov.proveedor')
+->where(['chequewebdesglosecompra.idcompra' => $int])
+->where('Mov','=','Orden Compra Super')
+->groupBy('COMPRA.idcompra','Comprad.IVA','Comprad.IEPS','comprad.articulo','prov.proveedor','prov.nombre','prov.direccion','prov.delegacion','prov.codigopostal','prov.estado','comprad.id','comprad.renglonid','comprad.cantidad','comprad.costo','comprad.impuesto1','comprad.impuesto2','comprad.impuesto3','comprad.descuentolinea','comprad.descuentoimporte','comprad.aplica','comprad.aplicaid','comprad.unidad','comprad.factor','comprad.cantidadinventario','comprad.importe'
+,'art.descripcion1','compra.idintelisis','compra.empresa','compra.mov','compra.movid','compra.fechaemision','compra.ultimocambio','compra.concepto','compra.moneda','compra.tipocambio','compra.usuario','compra.referencia','compra.observaciones','compra.estatus','compra.proveedor','compra.formaenvio','compra.fecharequerida',
+'compra.almacen','compra.condicion','compra.descuentoglobal','compra.importe','compra.impuestos','compra.origentipo','compra.origen','compra.origenid','compra.sucursal'
+,'ChequeWebDesgloseCompra.Mov','ChequeWebDesgloseCompra.MovID','ChequeWebDesgloseCompra.IdCompra','ChequeWebDesgloseCompra.DescuentoTotal','ChequeWebDesgloseCompra.DescuentoCedis','ChequeWebDesgloseCompra.DescuentoPublicidad'
+)
+->get();
 $topdetalle = DB::table('compra')
 ->select('prov.proveedor','prov.nombre as provnombre','prov.direccion as provdireccion','prov.delegacion as provdelegacion','prov.codigopostal as provcodigopostal','prov.estado as provestado','Comprad.*','Art.descripcion1 as Descripcion1','compra.*','ChequeWebDesgloseCompra.*',
 DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,FechaRequerida) as FechaRequerida'),DB::raw('ROUND(comprad.importe,2) as importein'))

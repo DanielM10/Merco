@@ -31,6 +31,8 @@ class proveedorescontroller extends Controller
         return view('proveedores', ['proveedores' => $proveedores]);
     }
     public function update(Request $request){
+
+        
         $pass = Proveedor::where(
             [
                  'Proveedor' => $request->noproveedorx            

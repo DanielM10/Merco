@@ -36,6 +36,25 @@ class serviciosproductoscontroller extends Controller
         return view('serviciosproductos');
     }
     public function store(Request $request){
+        $id = Auth::id();
+        $url=$request->path();
+        $idpantalla=DB::table('Menu')
+        ->select('IdMenu')
+        ->where('Descipcion','=','Productos')->first()->IdMenu;
+        $permisoeditar=DB::table('UsuarioPermisos')
+        ->select('Modificar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Modificar;
+        $permisoGuardar=DB::table('UsuarioPermisos')
+        ->select('Guardar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Guardar;
+        $permisoeliminar=DB::table('UsuarioPermisos')
+        ->select('Eliminar')
+        ->where('IdMenu','=',$idpantalla)->where('idusuario','=',$id)->first()->Eliminar;
+if($permisoGuardar==0){
+    Session::flash('errorproducto', 'No cuentas con permisos para guardar.' );
+    return redirect('serviciosproductos');
+}
+        
         $verificar=Productos::where('Articulo','=',$request->SKU)->count();        
         $verifik2 = Validator::make($request->all(), [
             'Proveedor' => 'required',
