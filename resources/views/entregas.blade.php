@@ -30,9 +30,13 @@
                     $( document ).ready(function() {
                         $("#tableentregas").dataTable().fnDestroy();
                         $('#tableentregas').dataTable( {
+                            "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+        },
     "pageLength": 25
 });
     });
+                    
 </script>                    
             <!-- END PAGE TITLE -->
 

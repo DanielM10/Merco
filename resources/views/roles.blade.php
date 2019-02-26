@@ -61,9 +61,13 @@ $(document).on('click', '#Protegidox1', function (e) {
                     $( document ).ready(function() {
                         $("#tableroles").dataTable().fnDestroy();
                         $('#tableroles').dataTable( {
+                            "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+        },
     "pageLength": 25
 });
     });
+                    
                     
                 </script>   
 <div>
