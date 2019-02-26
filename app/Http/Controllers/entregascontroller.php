@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Compra;
+use Auth;
 use Redirect;
 use App\Directorio;
 use Session;
@@ -13,7 +14,7 @@ use App\Http\Controllers\Controller;
 
 class entregascontroller extends Controller
 {
-     /**
+      /**
      * Create a new controller instance.
      *
      * @return void
@@ -35,26 +36,70 @@ class entregascontroller extends Controller
     $urlestatus=$request->input('estatus');
     $urlproveedor=$request->input('proveedor');
     $urlsucursal=$request->input('sucursal');
-    //QUERY ORIGINAL DE MERCO
 
-if($urlperiodo==null&&$urlinputx==null&&$urlestatus==null&&$urlproveedor==null&&$urlsucursal==null){
+    $id = Auth::id();
+    $COMP=   $ordenescompra = DB::table('users')
+    ->select('Rol.TipoRol','Rol.Nombre','name')
+    ->join('Rol','Rol.idRol','=','users.idRol')
+    ->where('users.id','=',$id)->get();
+$esadmin= $ordenescompra = DB::table('users')
+->select('Rol.TipoRol','Rol.Nombre as rolee','name')
+->join('Rol','Rol.idRol','=','users.idRol')
+->where('users.id','=',$id)->first()->rolee;
+$esadmin=preg_match('/admin/i', $esadmin);
+//SE EXTRAE EL ID DE PROVEEDOR
+$provid= DB::table('users')
+->select('users.proveedor as idprov','Rol.Nombre as rolee','name')
+->join('Rol','Rol.idRol','=','users.idRol')
+->where('users.id','=',$id)->first()->idprov;
+
+    //QUERY ORIGINAL DE MERCO
+//QUERY PARA ADMIN DE encabezados
+if($urlperiodo==null&&$urlinputx==null&&$urlestatus==null&&$urlproveedor==null&&$urlsucursal==null&&$esadmin==1){
     $ordenescompra = DB::table('ChequeWebDesgloseCompra')
-    ->select('ChequeWebDesgloseCompra.*','compra.descuentoglobal as Descuentoglobal','compra.importe as Importe',
+    ->select('ChequeWebDesgloseCompra.*','compra.MOV','compra.MovId','compra.descuentoglobal as Descuentoglobal','compra.importe as Importe',
     DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,FechaRequerida) as FechaRequerida'),
     'estatus','Almacen','Impuestos')
-    ->join('Compra','compra.id','=','ChequeWebDesgloseCompra.idcompra')
+    ->join('Compra','compra.idintelisis','=','ChequeWebDesgloseCompra.idcompra')
+    ->where('chequewebdesglosecompra.Mov','=','Entrada Compra')
     ->take(1000)->get();
     $sucursales=Directorio::get();
     $proveedores = Proveedor::get();
-    return view('entregas',compact('ordenescompra','sucursales','proveedores'));   
+    return view('ordenescompra',compact('ordenescompra','sucursales','proveedores','COMP','ok'));   
 }
-
-    $query = DB::table('ChequeWebDesgloseCompra')
-    ->select('ChequeWebDesgloseCompra.*','compra.importe as Importe',
+//QUERY PARA PROVEEDOR de encabezados
+if($urlperiodo==null&&$urlinputx==null&&$urlestatus==null&&$urlproveedor==null&&$urlsucursal==null&&$esadmin==0){
+    $ordenescompra = DB::table('ChequeWebDesgloseCompra')
+    ->select('ChequeWebDesgloseCompra.*','compra.MOV','compra.MovId','compra.descuentoglobal as Descuentoglobal','compra.importe as Importe',
     DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,FechaRequerida) as FechaRequerida'),
     'estatus','Almacen','Impuestos')
-    ->join('Compra','compra.id','=','ChequeWebDesgloseCompra.idcompra');
-//INICIO DE QUERY DINAMICO
+    ->join('Compra','compra.idintelisis','=','ChequeWebDesgloseCompra.idcompra')   
+    ->where('compra.proveedor','=',$provid)
+    ->where('chequewebdesglosecompra.Mov','=','Entrada Compra')
+    ->take(1000)->get();
+    $sucursales=Directorio::get();
+    $proveedores = Proveedor::get();
+    return view('ordenescompra',compact('ordenescompra','sucursales','proveedores','COMP','ok'));   
+}
+//QUERY DINAMICO SI LOS CAMPOS NO ESTAN VACIOS PARA EL PROVEEDOR
+if(($urlperiodo!=null||$urlinputx!=null||$urlestatus!=null||$urlproveedor!=null||$urlsucursal!=null)&&$esadmin==0){
+    $query = DB::table('ChequeWebDesgloseCompra')
+    ->select('ChequeWebDesgloseCompra.*','compra.MOV','compra.MovId','compra.importe as Importe',
+    DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,FechaRequerida) as FechaRequerida'),
+    'estatus','Almacen','Impuestos')
+    ->where('compra.Mov','=','Entrada Compra')   
+    ->join('Compra','compra.idintelisis','=','ChequeWebDesgloseCompra.idcompra');
+}
+//QUERY DINAMICO SI LOS CAMPOS NO ESTAN VACIOS PARA EL ADMIN
+if($urlperiodo!=null||$urlinputx!=null||$urlestatus!=null||$urlproveedor!=null||$urlsucursal!=null&&$esadmin==1){
+    $query = DB::table('ChequeWebDesgloseCompra')
+    ->select('ChequeWebDesgloseCompra.*','compra.MOV','compra.MovId','compra.importe as Importe',
+    DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,FechaRequerida) as FechaRequerida'),
+    'estatus','Almacen','Impuestos')
+    ->where('compra.Mov','=','Entrada Compra')
+    ->join('Compra','compra.idintelisis','=','ChequeWebDesgloseCompra.idcompra');
+}
+//INICIO DE QUERY DINAMICO PARA ADMIN
 if ($urlperiodo!=null) {
     $sindiagonal=str_replace('-','*',$request->input('periodo'));
     $sindiagonal1=str_replace('/','-',$sindiagonal);
@@ -77,12 +122,23 @@ if(!empty($urlproveedor)){
 if(!empty( $urlsucursal)){
         $query->whereIn('compra.Sucursal',$urlsucursal) ;   
 }
+if($esadmin==0){
+    $query->where('compra.proveedor','=',$provid);
+ }
 $ordenescompra=$query->take(1000)->get();
-    //armado del query para filtro
+//armado del query para filtro
  $queryasql=$query->toSql();
  $sucursales=Directorio::get();
- $proveedores = Proveedor::get(); 
- return view('entregas',compact('ordenescompra','sucursales','proveedores'));      
+ $combomostrar= DB::table('prov')
+ ->select('prov.*');
+ //combo para mostrar proveedores si es admin o no
+ if($esadmin==0){
+    $combomostrar->where('Proveedor','=',$provid);
+ }
+ $proveedores=$combomostrar->get();
+
+ 
+ return view('ordenescompra',compact('ordenescompra','sucursales','proveedores','COMP','ok'));      
     
 
     }
