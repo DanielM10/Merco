@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class pagoscontroller extends Controller
@@ -24,6 +25,16 @@ class pagoscontroller extends Controller
      */
     public function index()
     {
-        return view('pagos');
+        $pagos = DB::table('CxpWebPortalProveedor')
+                    ->select('CxpWebPortalProveedor.MovId','CxpWebPortalProveedor.Mov','prov.Nombre','cxp.FechaEmision','cxp.Importe')
+                    // ->join('cxp','cxp.Mov','=','CxpWebPortalProveedor.Mov')
+                    ->join('cxp', function ($join) {
+                        $join->on('cxp.Mov', '=', 'CxpWebPortalProveedor.Mov')
+                            ->on('cxp.MovId', '=', 'CxpWebPortalProveedor.MovId');
+                    })
+                    ->join('Prov','Prov.Proveedor','=','CxpWebPortalProveedor.prov')
+                    // ->where('cxp.Estatus','=','Pendiente')
+                    ->get();
+        return view('pagos', compact('pagos'));
     }
 }
