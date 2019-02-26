@@ -579,8 +579,8 @@ padding: 7px 10px;"><i class="fa fa-search"></i></button>
                                         <td>{{$pago->MovId}}</td>
                                         <td>{{$pago->Mov}}</td>
                                         <td>{{$pago->Nombre}}</td>
-                                        <td>{{$pago->FechaEmision}}</td>
-                                        <td>{{$pago->Importe}}</td>
+                                        <td>{{date('d-M-Y', strtotime($pago->FechaEmision))}}</td>
+                                        <td>{{'$' . number_format($pago->Importe, 2)}}</td>
                                         <td></td>
                                         <td></td>
                                         <td></td>

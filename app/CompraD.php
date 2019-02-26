@@ -24,5 +24,7 @@ class CompraD extends Model
       ,'Unidad' => 'required'
       ,'Factor' => 'required'
       ,'CantidadInventario' => 'required'
+      ,'IVA' => 'required'
+      ,'IEPS' => 'required'
     ];
 }

@@ -34,5 +34,7 @@ class Compra extends Model
         ,'Origen' => 'required'
         ,'OrigenID' => 'required'
         ,'Sucursal' => 'required'
+        ,'IVA' => 'required'
+        ,'IEPS' => 'required'
     ];
 }

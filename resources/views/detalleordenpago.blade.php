@@ -178,16 +178,16 @@
                                 <table class="table table-striped text">    
                                 <thead >                           
                               <tr>                              
-                               <th>ALMACEN</th>
-                               <th>ARTICULO</th>
-                               <th>DESCRIPCION</th><!--JOIN CON ARTICULO-->
-                               <th>CANTIDAD</th>
-                               <th>UNIDAD</th>
-                               <th>EMPAQUE</th>
-                               <th>% DESC.</th>
+                               <th>Almacen</th>
+                               <th>Articulo</th>
+                               <th>Descripción</th><!--JOIN CON ARTICULO-->
+                               <th>Cantidad</th>
+                               <th>Unidad</th>
+                               <th>Empaque</th>
+                               <th>% Desc.</th>
                                
-                               <th>COSTO UNITARIO</th>
-                               <th>IMPORTE</th>
+                               <th>Costo Unitario</th>
+                               <th>Importe</th>
                                </tr>
 </thead>
                                 <tbody>
@@ -204,12 +204,12 @@
                                 <TD>{{$detallex->Almacen}}</TD>
                                 <TD>{{$detallex->Articulo}}</TD>
                                 <TD>{{$detallex->Descripcion1}}</TD><!--JOIN CON ARTICULO-->
-                                <TD>{{$detallex->Cantidad}}</TD>
-                                <TD>{{$detallex->Unidad}}</TD>
-                                <TD>{{$detallex->Factor}}</TD>
-                                <TD>{{number_format($detallex->DescuentoLinea,2)}}</TD>                               
-                                <TD>{{number_format($detallex->Costo,2)}}</TD><!--IMPORTE / FACTOR-->
-                                <TD>{{number_format($detallex->importein,2)}}</TD><!--IMPORTE DE COMPRADCALC-->
+                                <TD>{{(int)$detallex->Cantidad}}</TD>
+                                <TD>{{(int)$detallex->Unidad}}</TD>
+                                <TD>{{(int)$detallex->Factor}}</TD>
+                                <TD>{{'$' . number_format($detallex->DescuentoLinea,2)}}</TD>                               
+                                <TD>{{'$' . number_format($detallex->Costo,2)}}</TD><!--IMPORTE / FACTOR-->
+                                <TD>{{'$' . number_format($detallex->importein,2)}}</TD><!--IMPORTE DE COMPRADCALC-->
                                 <!--termina for each-->
                                 </TR>
                                 @endforeach
@@ -218,24 +218,29 @@
                                 <table class="table text">  
                                 <tbody>
                                 <tr>                
-                               <th rowspan="6">Observaciones: {{$orden->Observaciones}}</th>
+                               <th rowspan="6">Observaciones:</th>
+                               <th>Importe: {{'$' . number_format($orden->Importe, 2)}}</th>
+                              <!--  <th>{{$orden->Observaciones}}</th> -->
+                             </tr>
                                <!--FALTANTES-->
-                               <th>IMPORTE: {{number_format($orden->Importe, 2)}}</th>
+                               <!-- <tr>
+                               
+                               </tr> -->
+                               <tr>
+                               <th>IEPS: {{'$' . number_format($orden->IEPS,2)}}</th>
                                </tr>
                                <tr>
-                               <th>Descuento: {{number_format($orden->Importe*$orden->descuentog/100,2)}}</th>
+                               <th>IVA: {{'$' . number_format($orden->IVA,2)}}</th>
                                </tr>
                                <tr>
-                               <th>Subtotal: {{number_format($orden->Importe-$orden->Importe*$orden->descuentog/100,2)}}</th>
+                               <th>Subtotal: {{'$' . number_format($orden->Importe+$orden->IEPS+$orden->IVA,2)}}</th>
+                               </tr>
+                               
+                               <tr>
+                               <th>Descuento: {{'$' .number_format($orden->DescuentoTotal,2)}}</th>
                                </tr>
                                <tr>
-                               <th>IEPS: {{number_format($iepsx->ieps,2)}}</th>
-                               </tr>
-                               <tr>
-                               <th>IVA: {{number_format($detalleivax->imx,2)}}</th>
-                               </tr>
-                               <tr>
-                               <th>Total: {{$orden->Observaciones}}</th>
+                               <th>Total: {{'$' . number_format($orden->Importe+$orden->IEPS+$orden->IVA - $orden->DescuentoTotal,2)}}</th>
                                </tr>
                                </tbody>
                                </table>   

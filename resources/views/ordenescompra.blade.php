@@ -334,6 +334,8 @@ padding: 7px 10px;"><i class="fa fa-search"></i></button>
                                         <th>Almacen</th>
                                         <th>Importe</th>
                                         <th>Descuento</th>
+                                        <th>IVA</th>
+                                        <th>IEPS</th>
                                         <th>Total</th>
                                         <th>Estatus</th>
                                         <th>Desglose orden</th>
@@ -368,6 +370,7 @@ padding: 7px 10px;"><i class="fa fa-search"></i></button>
         <td> </td>
         <td> </td>
         <td> </td>
+        <td> </td>
         
 </tr>
 
@@ -376,8 +379,8 @@ padding: 7px 10px;"><i class="fa fa-search"></i></button>
         <tr>
         <td>{{$ordencomprax->MovID}}</td>
                                         <td>{{$ordencomprax->Mov}}</td>                                                                           
-                                        <td class="resalta">{{$ordencomprax->FechaEmision}}</td>
-                                        <td>{{$ordencomprax->FechaRequerida}}</td>
+                                        <td class="resalta">{{date('d-M-Y',strtotime($ordencomprax->FechaEmision))}}</td>
+                                        <td>{{date('d-M-Y', strtotime($ordencomprax->FechaRequerida))}}</td>
                                         <td >{{$ordencomprax->Almacen}}</td>
                                         <!--
                                             -----------------------------------------------------------------
@@ -389,9 +392,11 @@ padding: 7px 10px;"><i class="fa fa-search"></i></button>
                                         <td><span class="fa fa-times btn-danger btn-sm"></span></td>
                                         ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
                                         -->
-                                        <td class="resalta">{{$ordencomprax->Importe}}</td>
-                                        <td>{{$ordencomprax->DescuentoTotal}}</td>
-                                        <td class="resalta">{{$ordencomprax->Impuestos+$ordencomprax->Importe-$ordencomprax->DescuentoTotal}}</td>
+                                        <td class="resalta">{{'$' . number_format($ordencomprax->Importe, 2)}}</td>
+                                        <td>{{'$' . number_format($ordencomprax->DescuentoTotal, 2)}}</td>
+                                         <td>{{'$' . number_format($ordencomprax->IVA, 2)}}</td>
+                                          <td>{{'$' . number_format($ordencomprax->IEPS, 2)}}</td>
+                                        <td class="resalta">{{'$' . number_format($ordencomprax->Importe+$ordencomprax->IVA+$ordencomprax->IEPS -$ordencomprax->DescuentoTotal, 2)}}</td>
                                         <td>@if($ordencomprax->Estatus='CONCLUIDO')<span class="fa fa-check btn-success btn-sm"></span>@elseif($ordencomprax->Estatus='PENDIENTE')<span class="fa fa-exclamation btn-warning btn-sm"></span>@elseif($ordencomprax->Estatus='CANCELADO')<span class="fa fa-times btn-danger btn-sm"></span>@endif</td>
                                         <th><a href="detalleordenes?aa={{$ordencomprax->IdCompra}}&&bb={{$ordencomprax->MovId}}&&cc={{$ordencomprax->Mov}}" class="btn btn-default btn-sm fa fa-tasks"></a>
                                         </th>

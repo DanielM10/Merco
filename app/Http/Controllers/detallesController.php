@@ -31,7 +31,7 @@ class detallesController extends Controller
             //query original merc
             //$ordenescompra = DB::table('Compra')->where('MovId', $urlinputx)->get();
 $orden = DB::table('compra')
-->select('Comprad.*','compra.*','compra.DescuentoGlobal as descuentog','ChequeWebDesgloseCompra.*',DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,FechaRequerida) as FechaRequerida'))
+->select('Comprad.*','compra.*','compra.IVA', 'compra.IEPS', 'compra.DescuentoGlobal as descuentog','ChequeWebDesgloseCompra.*',DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,FechaRequerida) as FechaRequerida'))
 ->join('Comprad','compra.idintelisis','=','comprad.id')
 ->join('ChequeWebDesgloseCompra','ChequeWebDesgloseCompra.idcompra','=','compra.idintelisis')
 ->where(['chequewebdesglosecompra.idcompra' => $int])
@@ -49,7 +49,7 @@ DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,Fech
 ->where('compra.Mov','=','Orden Compra Super')
 ->groupBy('COMPRA.idcompra','Comprad.IVA','Comprad.IEPS','comprad.articulo','prov.proveedor','prov.nombre','prov.direccion','prov.delegacion','prov.codigopostal','prov.estado','comprad.id','comprad.renglonid','comprad.cantidad','comprad.costo','comprad.impuesto1','comprad.impuesto2','comprad.impuesto3','comprad.descuentolinea','comprad.descuentoimporte','comprad.aplica','comprad.aplicaid','comprad.unidad','comprad.factor','comprad.cantidadinventario','comprad.importe'
 ,'art.descripcion1','compra.idintelisis','compra.empresa','compra.mov','compra.movid','compra.fechaemision','compra.ultimocambio','compra.concepto','compra.moneda','compra.tipocambio','compra.usuario','compra.referencia','compra.observaciones','compra.estatus','compra.proveedor','compra.formaenvio','compra.fecharequerida',
-'compra.almacen','compra.condicion','compra.descuentoglobal','compra.importe','compra.impuestos','compra.origentipo','compra.origen','compra.origenid','compra.sucursal'
+'compra.almacen','compra.condicion','compra.descuentoglobal','compra.importe','compra.impuestos','compra.origentipo','compra.origen','compra.origenid','compra.sucursal', 'compra.IVA','compra.IEPS'
 ,'ChequeWebDesgloseCompra.Mov','ChequeWebDesgloseCompra.MovID','ChequeWebDesgloseCompra.IdCompra','ChequeWebDesgloseCompra.DescuentoTotal','ChequeWebDesgloseCompra.DescuentoCedis','ChequeWebDesgloseCompra.DescuentoPublicidad'
 )
 ->get();
@@ -64,7 +64,7 @@ DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,Fech
 ->where('compra.Mov','=','Entrada Compra')
 ->groupBy('COMPRA.idcompra','Comprad.IVA','Comprad.IEPS','comprad.articulo','prov.proveedor','prov.nombre','prov.direccion','prov.delegacion','prov.codigopostal','prov.estado','comprad.id','comprad.renglonid','comprad.cantidad','comprad.costo','comprad.impuesto1','comprad.impuesto2','comprad.impuesto3','comprad.descuentolinea','comprad.descuentoimporte','comprad.aplica','comprad.aplicaid','comprad.unidad','comprad.factor','comprad.cantidadinventario','comprad.importe'
 ,'art.descripcion1','compra.idintelisis','compra.empresa','compra.mov','compra.movid','compra.fechaemision','compra.ultimocambio','compra.concepto','compra.moneda','compra.tipocambio','compra.usuario','compra.referencia','compra.observaciones','compra.estatus','compra.proveedor','compra.formaenvio','compra.fecharequerida',
-'compra.almacen','compra.condicion','compra.descuentoglobal','compra.importe','compra.impuestos','compra.origentipo','compra.origen','compra.origenid','compra.sucursal'
+'compra.almacen','compra.condicion','compra.descuentoglobal','compra.importe','compra.impuestos','compra.origentipo','compra.origen','compra.origenid','compra.sucursal','compra.IVA','compra.IEPS'
 ,'ChequeWebDesgloseCompra.Mov','ChequeWebDesgloseCompra.MovID','ChequeWebDesgloseCompra.IdCompra','ChequeWebDesgloseCompra.DescuentoTotal','ChequeWebDesgloseCompra.DescuentoCedis','ChequeWebDesgloseCompra.DescuentoPublicidad'
 )
 ->get();
@@ -79,13 +79,14 @@ DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,Fech
 ->where('compra.Mov','=','Orden Compra Super')
 ->groupBy('COMPRA.idcompra','Comprad.IVA','Comprad.IEPS','comprad.articulo','prov.proveedor','prov.nombre','prov.direccion','prov.delegacion','prov.codigopostal','prov.estado','comprad.id','comprad.renglonid','comprad.cantidad','comprad.costo','comprad.impuesto1','comprad.impuesto2','comprad.impuesto3','comprad.descuentolinea','comprad.descuentoimporte','comprad.aplica','comprad.aplicaid','comprad.unidad','comprad.factor','comprad.cantidadinventario','comprad.importe'
 ,'art.descripcion1','compra.idintelisis','compra.empresa','compra.mov','compra.movid','compra.fechaemision','compra.ultimocambio','compra.concepto','compra.moneda','compra.tipocambio','compra.usuario','compra.referencia','compra.observaciones','compra.estatus','compra.proveedor','compra.formaenvio','compra.fecharequerida',
-'compra.almacen','compra.condicion','compra.descuentoglobal','compra.importe','compra.impuestos','compra.origentipo','compra.origen','compra.origenid','compra.sucursal'
+'compra.almacen','compra.condicion','compra.descuentoglobal','compra.importe','compra.impuestos','compra.origentipo','compra.origen','compra.origenid','compra.sucursal','compra.IVA','compra.IEPS'
 ,'ChequeWebDesgloseCompra.Mov','ChequeWebDesgloseCompra.MovID','ChequeWebDesgloseCompra.IdCompra','ChequeWebDesgloseCompra.DescuentoTotal','ChequeWebDesgloseCompra.DescuentoCedis','ChequeWebDesgloseCompra.DescuentoPublicidad'
 )
 ->get();
 
 $detalleiva=
 DB::table('compra')
+
 ->select(DB::raw('SUM((((comprad.importe)*(1-compra.descuentoglobal/100) )*(CASE WHEN impuesto2 IS NULL OR impuesto2=0 THEN 1 ELSE impuesto2 END))*(impuesto1/100)) as imx'))
 ->join('Comprad','compra.idintelisis','=','comprad.id')
 ->join('ChequeWebDesgloseCompra','ChequeWebDesgloseCompra.idcompra','=','compra.idintelisis')
@@ -95,6 +96,7 @@ DB::table('compra')
 ->get();
 $detalleieps=
 DB::table('compra')
+
 ->select(DB::raw('SUM(((comprad.importe)*(1-compra.descuentoglobal/100))*(CASE WHEN comprad.impuesto2 IS NULL OR comprad.impuesto2=0 THEN 1 ELSE comprad.impuesto2/100 END)) as ieps'))
 ->join('Comprad','compra.idintelisis','=','comprad.id')
 ->join('ChequeWebDesgloseCompra','ChequeWebDesgloseCompra.idcompra','=','compra.idintelisis')
@@ -160,6 +162,7 @@ DB::raw('CONVERT(date,FechaEmision) as FechaEmision'),DB::raw('CONVERT(date,Fech
 
 $detalleiva=
 DB::table('compra')
+->select('IVA imx')
 ->select(DB::raw('SUM((((comprad.importe)*(1-compra.descuentoglobal/100) )*(CASE WHEN impuesto2 IS NULL OR impuesto2=0 THEN 1 ELSE impuesto2 END))*(impuesto1/100)) as imx'))
 ->join('Comprad','compra.IdIntelisis','=','comprad.id')
 ->join('ChequeWebDesgloseCompra','ChequeWebDesgloseCompra.idcompra','=','compra.IdIntelisis')
@@ -176,6 +179,7 @@ DB::table('compra')
 ->where('compra.Mov','=','Orden Compra Super')
 ->where(['chequewebdesglosecompra.idcompra' => $int])
 ->where('Mov','=','Orden Compra Super')
+
 ->get();
 
 
