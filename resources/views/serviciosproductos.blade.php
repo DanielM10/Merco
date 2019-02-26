@@ -114,6 +114,7 @@
                                             <th>Proveedor</th>
                                             <th>SKU </th>
                                             <th>Descripción</th>
+                                            <th>Estatus</th>
 
 
                                         </tr>
@@ -124,6 +125,7 @@
                                         <td>{{$product->Proveedor}}</td>
                                         <td>{{$product->Articulo}}</td>
                                         <td>{{$product->Descripcion1}}</td>
+                                        <td>@If($product->Activo==1)Activo @else Inactivo @endif</td>
                                         </tr>
                                        @endforeach
                                     </tbody>

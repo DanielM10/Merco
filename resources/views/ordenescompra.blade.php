@@ -127,7 +127,7 @@ padding: 7px 10px;"><i class="fa fa-search"></i></button>
     <label class="col-md-12 control-label">Sucursal</label>
     <select multiple id="sucursal" name="sucursal[]" class="form-control select col-md-12 col-xs-12" name="sucursalbusc" id="sucursalbusc" data-live-search="true" title="--Seleccionar--">
         @foreach($sucursales as $sucursal)
-        <option value="{{$sucursal->IdSucursal}}">{{$sucursal->NombreSuc}}</option>
+        <option value="{{$sucursal->Sucursal}}">{{$sucursal->Nombre}}</option>
         @endforeach
         
     </select>
