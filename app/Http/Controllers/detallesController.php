@@ -101,7 +101,7 @@ DB::table('compra')
 ->join('Art','Art.articulo','=','comprad.articulo')
 ->where('compra.Mov','=','Orden Compra Super')
 ->where(['chequewebdesglosecompra.idcompra' => $int])
-->where('Mov','=','Orden Compra Super')
+->where('compra.Mov','=','Orden Compra Super')
 ->get();
 
 
